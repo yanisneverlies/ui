@@ -87,4 +87,4 @@ npm run registry:build  # writes public/r/*.json; commit the output
 
 ## License
 
-TBD
+[MIT](LICENSE)
