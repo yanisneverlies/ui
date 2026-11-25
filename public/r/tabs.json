@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tabs",
+  "title": "Tabs",
+  "description": "Switch between panels of related content.",
+  "dependencies": [
+    "@ui-sdk/react",
+    "@ui-sdk/core"
+  ],
+  "registryDependencies": [
+    "@yanisneverlies/theme",
+    "@yanisneverlies/utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/tabs.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  Tabs,\n  TabsIndicator,\n  TabsList as TabsListPart,\n  TabsPanel as TabsPanelPart,\n  TabsTab as TabsTabPart,\n} from \"@ui-sdk/react/tabs\"\n\nimport { cx } from \"@/lib/utils\"\n\n/** The list brings its own indicator: a raised pill that slides to the selected tab. */\nfunction TabsList({ className, children, ...props }: React.ComponentProps<typeof TabsListPart>) {\n  return (\n    <TabsListPart\n      className={cx(\n        \"relative inline-flex max-w-full items-center gap-1 overflow-x-auto rounded-lg bg-secondary p-1 data-[orientation=vertical]:overflow-x-auto sm:data-[orientation=vertical]:flex-col sm:data-[orientation=vertical]:items-stretch sm:data-[orientation=vertical]:overflow-visible\",\n        className\n      )}\n      {...props}\n    >\n      {(state) => (\n        <>\n          <TabsIndicator className=\"absolute top-(--active-tab-top) left-(--active-tab-left) h-(--active-tab-height) w-(--active-tab-width) rounded-sm bg-background shadow-raised transition-[left,top,width,height] duration-200 ease-(--ease-out) data-[activation-direction=none]:transition-none motion-reduce:transition-none\" />\n          {typeof children === \"function\" ? children(state) : children}\n        </>\n      )}\n    </TabsListPart>\n  )\n}\n\nfunction TabsTab({ className, ...props }: React.ComponentProps<typeof TabsTabPart>) {\n  return (\n    <TabsTabPart\n      className={cx(\n        \"relative z-10 inline-flex h-8 shrink-0 pointer-coarse:after:absolute pointer-coarse:after:inset-x-0 pointer-coarse:after:-inset-y-1.5 pointer-coarse:after:content-['']  items-center gap-2 rounded-sm px-3 text-small font-medium whitespace-nowrap text-muted-foreground transition-colors duration-150 hover:text-foreground data-selected:text-foreground data-disabled:opacity-45 [&_svg]:size-4\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction TabsPanel({ className, ...props }: React.ComponentProps<typeof TabsPanelPart>) {\n  return <TabsPanelPart className={cx(\"min-w-0 pt-4 sm:in-data-[orientation=vertical]:pt-0 outline-none focus-visible:rounded-sm\", className)} {...props} />\n}\n\n/** Vertical tabs sit beside their panels from `sm` up; below that the list becomes a scrolling row above them. */\nfunction TabsRoot({ className, ...props }: React.ComponentProps<typeof Tabs>) {\n  return <Tabs className={cx(\"data-[orientation=vertical]:flex data-[orientation=vertical]:flex-col data-[orientation=vertical]:gap-4 sm:data-[orientation=vertical]:flex-row sm:data-[orientation=vertical]:gap-6\", className)} {...props} />\n}\n\nexport { TabsRoot as Tabs, TabsList, TabsTab, TabsPanel }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

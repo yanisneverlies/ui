@@ -8,69 +8,436 @@
       "type": "registry:file",
       "title": "Theme",
       "description": "Design tokens: warm neutrals, one primary, semantic tones, concentric radii, Inter and Apfel Grotezk. Import it after tailwindcss in your global CSS.",
-      "dependencies": ["@fontsource-variable/inter", "@fontsource/apfel-grotezk"],
-      "files": [{ "path": "src/styles/ui.css", "type": "registry:file", "target": "~/styles/ui.css" }]
+      "dependencies": [
+        "@fontsource-variable/inter",
+        "@fontsource/apfel-grotezk"
+      ],
+      "files": [
+        {
+          "path": "src/styles/ui.css",
+          "type": "registry:file",
+          "target": "~/styles/ui.css"
+        }
+      ]
     },
     {
       "name": "utils",
       "type": "registry:lib",
       "title": "Utils",
       "description": "cn(): clsx plus tailwind-merge that knows the custom type scale.",
-      "dependencies": ["clsx", "tailwind-merge"],
-      "files": [{ "path": "src/lib/utils.ts", "type": "registry:lib" }]
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib"
+        }
+      ]
     },
     {
       "name": "sound",
       "type": "registry:lib",
       "title": "Sound",
       "description": "Opt-in interaction sounds through cuelume. Off unless the app turns them on.",
-      "dependencies": ["cuelume"],
-      "files": [{ "path": "src/lib/sound.tsx", "type": "registry:lib" }]
+      "dependencies": [
+        "cuelume"
+      ],
+      "files": [
+        {
+          "path": "src/lib/sound.tsx",
+          "type": "registry:lib"
+        }
+      ]
     },
     {
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
-      "description": "Primary, secondary, tonal, ghost, danger and link; three sizes plus icon sizes; asChild; optional sound.",
-      "dependencies": ["radix-ui", "class-variance-authority"],
-      "registryDependencies": ["@yanisneverlies/theme", "@yanisneverlies/utils", "@yanisneverlies/sound"],
-      "files": [{ "path": "src/components/ui/button.tsx", "type": "registry:ui" }]
+      "description": "Primary, secondary, tonal, ghost, destructive and link; three sizes plus icon sizes; render prop; pending state; optional sound.",
+      "dependencies": [
+        "@ui-sdk/react",
+        "@ui-sdk/core",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@yanisneverlies/theme",
+        "@yanisneverlies/utils",
+        "@yanisneverlies/sound"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/button.tsx",
+          "type": "registry:ui"
+        }
+      ]
     },
     {
       "name": "badge",
       "type": "registry:ui",
       "title": "Badge",
-      "description": "A quiet label on a tinted ground. Tones, rect or pill, two sizes, asChild.",
-      "dependencies": ["radix-ui", "class-variance-authority"],
-      "registryDependencies": ["@yanisneverlies/theme", "@yanisneverlies/utils"],
-      "files": [{ "path": "src/components/ui/badge.tsx", "type": "registry:ui" }]
+      "description": "A quiet label on a tinted ground. Tones, rect or pill, two sizes, render prop.",
+      "dependencies": [
+        "@ui-sdk/react",
+        "@ui-sdk/core",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@yanisneverlies/theme",
+        "@yanisneverlies/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/badge.tsx",
+          "type": "registry:ui"
+        }
+      ]
     },
     {
       "name": "card",
       "type": "registry:ui",
       "title": "Card",
       "description": "Shell card with a raised panel and concentric radii, or a single surface card.",
-      "dependencies": ["class-variance-authority"],
-      "registryDependencies": ["@yanisneverlies/theme", "@yanisneverlies/utils"],
-      "files": [{ "path": "src/components/ui/card.tsx", "type": "registry:ui" }]
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@yanisneverlies/theme",
+        "@yanisneverlies/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/card.tsx",
+          "type": "registry:ui"
+        }
+      ]
     },
     {
       "name": "kbd",
       "type": "registry:ui",
       "title": "Kbd",
       "description": "Keyboard hints: flat, keycap, or on a primary button.",
-      "dependencies": ["class-variance-authority"],
-      "registryDependencies": ["@yanisneverlies/theme", "@yanisneverlies/utils"],
-      "files": [{ "path": "src/components/ui/kbd.tsx", "type": "registry:ui" }]
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@yanisneverlies/theme",
+        "@yanisneverlies/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/kbd.tsx",
+          "type": "registry:ui"
+        }
+      ]
     },
     {
       "name": "switch",
       "type": "registry:ui",
       "title": "Switch",
-      "description": "Accessible switch on Radix, two sizes, plays the toggle cue when sound is on.",
-      "dependencies": ["radix-ui", "class-variance-authority"],
-      "registryDependencies": ["@yanisneverlies/theme", "@yanisneverlies/utils", "@yanisneverlies/sound"],
-      "files": [{ "path": "src/components/ui/switch.tsx", "type": "registry:ui" }]
+      "description": "Accessible switch on UI SDK, two sizes, plays the toggle cue when sound is on.",
+      "dependencies": [
+        "@ui-sdk/react",
+        "@ui-sdk/core",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@yanisneverlies/theme",
+        "@yanisneverlies/utils",
+        "@yanisneverlies/sound"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/switch.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "popup-classes",
+      "type": "registry:ui",
+      "title": "Popup classes",
+      "description": "Shared surface and motion classes for floating content: dialog, popover, tooltip, menu and select.",
+      "files": [
+        {
+          "path": "src/components/ui/popup-classes.ts",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "Dialog",
+      "description": "A modal over the page with title, description, close button and focus trap.",
+      "dependencies": [
+        "@ui-sdk/react",
+        "@ui-sdk/core",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@yanisneverlies/theme",
+        "@yanisneverlies/utils",
+        "@yanisneverlies/popup-classes"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/dialog.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "Popover",
+      "description": "Floating content beside its trigger, for editing or exploring in place.",
+      "dependencies": [
+        "@ui-sdk/react",
+        "@ui-sdk/core"
+      ],
+      "registryDependencies": [
+        "@yanisneverlies/theme",
+        "@yanisneverlies/utils",
+        "@yanisneverlies/popup-classes"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/popover.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "A short name or hint for a control, with an optional shortcut.",
+      "dependencies": [
+        "@ui-sdk/react",
+        "@ui-sdk/core"
+      ],
+      "registryDependencies": [
+        "@yanisneverlies/theme",
+        "@yanisneverlies/utils",
+        "@yanisneverlies/popup-classes"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/tooltip.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "menu",
+      "type": "registry:ui",
+      "title": "Menu",
+      "description": "Actions from a button or a right click, with items, checkboxes and submenus.",
+      "dependencies": [
+        "@ui-sdk/react",
+        "@ui-sdk/core"
+      ],
+      "registryDependencies": [
+        "@yanisneverlies/theme",
+        "@yanisneverlies/utils",
+        "@yanisneverlies/popup-classes"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Choose one or several from a popup list.",
+      "dependencies": [
+        "@ui-sdk/react",
+        "@ui-sdk/core",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@yanisneverlies/theme",
+        "@yanisneverlies/utils",
+        "@yanisneverlies/popup-classes"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/select.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "toast",
+      "type": "registry:ui",
+      "title": "Toast",
+      "description": "A status message that replaces the last one, with optional action.",
+      "dependencies": [
+        "@ui-sdk/react",
+        "@ui-sdk/core",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@yanisneverlies/theme",
+        "@yanisneverlies/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/toast.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "Switch between panels of related content.",
+      "dependencies": [
+        "@ui-sdk/react",
+        "@ui-sdk/core"
+      ],
+      "registryDependencies": [
+        "@yanisneverlies/theme",
+        "@yanisneverlies/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/tabs.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "segmented-control",
+      "type": "registry:ui",
+      "title": "Segmented control",
+      "description": "A compact row of mutually exclusive options.",
+      "dependencies": [
+        "@ui-sdk/react",
+        "@ui-sdk/core"
+      ],
+      "registryDependencies": [
+        "@yanisneverlies/theme",
+        "@yanisneverlies/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/segmented-control.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "accordion",
+      "type": "registry:ui",
+      "title": "Accordion",
+      "description": "Sections that expand and collapse.",
+      "dependencies": [
+        "@ui-sdk/react",
+        "@ui-sdk/core",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@yanisneverlies/theme",
+        "@yanisneverlies/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/accordion.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "Choose independent options, with groups and an indeterminate state. Plays the toggle cue when sound is on.",
+      "dependencies": [
+        "@ui-sdk/react",
+        "@ui-sdk/core",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@yanisneverlies/theme",
+        "@yanisneverlies/utils",
+        "@yanisneverlies/sound"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/checkbox.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "A text input with prefix and suffix groups and a clear button.",
+      "dependencies": [
+        "@ui-sdk/react",
+        "@ui-sdk/core",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@yanisneverlies/theme",
+        "@yanisneverlies/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "field",
+      "type": "registry:ui",
+      "title": "Field",
+      "description": "Label, description and error for a control, plus field sets and groups.",
+      "dependencies": [
+        "@ui-sdk/react",
+        "@ui-sdk/core"
+      ],
+      "registryDependencies": [
+        "@yanisneverlies/theme",
+        "@yanisneverlies/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/field.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "Textarea",
+      "description": "A multi-line text input that matches Input.",
+      "dependencies": [
+        "@ui-sdk/react",
+        "@ui-sdk/core"
+      ],
+      "registryDependencies": [
+        "@yanisneverlies/theme",
+        "@yanisneverlies/utils",
+        "@yanisneverlies/input"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/textarea.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }

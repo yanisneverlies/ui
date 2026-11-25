@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toast",
+  "title": "Toast",
+  "description": "A status message that replaces the last one, with optional action.",
+  "dependencies": [
+    "@ui-sdk/react",
+    "@ui-sdk/core",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "@yanisneverlies/theme",
+    "@yanisneverlies/utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/toast.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  Toast,\n  ToastAction,\n  ToastClose,\n  ToastDescription,\n  ToastRegion,\n  ToastTitle,\n  createToaster,\n  toast as queuedToast,\n} from \"@ui-sdk/react/toast\"\nimport { X } from \"lucide-react\"\n\nimport { cn, cx } from \"@/lib/utils\"\n\n/** Closes what's showing, then shows the new toast: one at a time, like a status line. */\nfunction replacing<Args extends unknown[], Result>(show: (...args: Args) => Result) {\n  return (...args: Args): Result => {\n    queuedToast.dismiss()\n    return show(...args)\n  }\n}\n\n/**\n * Same call signature and helpers as UI SDK's `toast`, but a new toast replaces the one showing instead of\n * waiting behind it. Pass your own `createToaster()` as the region's `toaster` to keep a queue.\n */\nconst toast = Object.assign(replacing(queuedToast), {\n  success: replacing(queuedToast.success),\n  error: replacing(queuedToast.error),\n  info: replacing(queuedToast.info),\n  warning: replacing(queuedToast.warning),\n  loading: replacing(queuedToast.loading),\n  promise: replacing(queuedToast.promise) as typeof queuedToast.promise,\n  update: queuedToast.update,\n  dismiss: queuedToast.dismiss,\n  toasts: queuedToast.toasts,\n  subscribe: queuedToast.subscribe,\n}) as typeof queuedToast\n\n/** Toaster's own props. It also takes every UI SDK ToastRegion prop, like `toaster` and `align`. */\ninterface ToasterOwnProps {\n  /**\n   * The edge it sits on.\n   * @defaultValue \"bottom\"\n   */\n  side?: \"top\" | \"bottom\"\n}\n\ntype ToasterProps = Omit<React.ComponentProps<typeof ToastRegion>, \"children\" | \"maxVisible\"> & ToasterOwnProps\n\n/**\n * Place once near the root, then call `toast(\"Saved\")` from anywhere. One toast shows at a time, like a\n * status line: a new one replaces the last instead of stacking.\n */\nfunction Toaster({ className, side = \"bottom\", align = \"center\", ...props }: ToasterProps) {\n  return (\n    <ToastRegion\n      side={side}\n      align={align}\n      maxVisible={1}\n      className={cx(\n        cn(\n          \"fixed inset-x-4 z-50 m-0 flex justify-center border-0 bg-transparent p-0\",\n          side === \"bottom\" ? \"bottom-[calc(16px+env(safe-area-inset-bottom))]\" : \"top-4\"\n        ),\n        className\n      )}\n      {...props}\n    >\n      {(item) => (\n        <Toast\n          className={(state) =>\n            cn(\n              \"pointer-events-auto flex min-h-11 w-fit max-w-[min(440px,100%)] [translate:var(--toast-swipe-x,0px)_var(--toast-swipe-y,0px)] items-center gap-4 rounded-lg bg-foreground py-2 ps-4 pe-2 text-body text-background shadow-float\",\n              \"transition-[opacity,translate,filter] duration-300 ease-(--ease-out) data-ending-style:duration-150 data-ending-style:ease-(--ease-in)\",\n              \"data-swiping:transition-none data-starting-style:opacity-0 data-ending-style:opacity-0 motion-safe:data-starting-style:translate-y-2 motion-safe:data-starting-style:blur-[2px] motion-safe:data-ending-style:translate-y-1\",\n              state.type === \"error\" && \"bg-destructive text-background\"\n            )\n          }\n        >\n          <div className=\"flex min-w-0 flex-col\">\n            <ToastTitle className=\"truncate font-medium\" />\n            <ToastDescription className=\"truncate text-small opacity-80 empty:hidden\" />\n          </div>\n          <div className=\"ms-auto flex shrink-0 items-center gap-1\">\n            <ToastAction className={cn(\"pressable h-8 rounded-sm px-3 text-small font-medium empty:hidden\", item.type === \"error\" ? \"bg-foreground/15 hover:bg-foreground/25\" : \"bg-background/15 hover:bg-background/25\")} />\n            <ToastClose\n              aria-label=\"Dismiss\"\n              className={cn(\"pressable grid size-8 place-items-center rounded-sm opacity-70 hover:opacity-100\", item.type === \"error\" ? \"hover:bg-foreground/15\" : \"hover:bg-background/15\")}\n            >\n              <X className=\"size-4\" aria-hidden=\"true\" />\n            </ToastClose>\n          </div>\n        </Toast>\n      )}\n    </ToastRegion>\n  )\n}\n\nexport { Toaster, toast, createToaster, type ToasterProps, type ToasterOwnProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

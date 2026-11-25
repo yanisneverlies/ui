@@ -1,0 +1,30 @@
+---
+title: Badge
+description: A quiet label on a tinted ground. The words carry the meaning; the tone repeats it.
+---
+
+<ComponentPreview name="badge-tones" />
+
+## Installation
+
+<Install name="badge" />
+
+## Playground
+
+<BadgePlayground />
+
+## Tones
+
+`destructive` is reserved for errors and failures, so nothing else should share its hue. `brand` marks the current item.
+
+## Shapes
+
+<ComponentPreview name="badge-shapes" />
+
+Use `rect` for labels like branch names, and `pill` for statuses and counts. Add `tnum` to counts so they don't shift as they change.
+
+## API
+
+<AutoTypeTable path="./src/components/ui/badge.tsx" name="BadgeOwnProps" />
+
+Badge also takes every native `<span>` prop.

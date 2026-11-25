@@ -1,0 +1,61 @@
+---
+title: Segmented control
+description: Pick one value from a few, like a view switch or a size. A form control with a sliding indicator.
+---
+
+<ComponentPreview name="segmented-control-demo" />
+
+## Installation
+
+<Install name="segmented-control" />
+
+## Usage
+
+```tsx title="Usage"
+import { SegmentedControl, SegmentedControlItem } from "@/components/ui/segmented-control"
+
+export function ViewSwitch() {
+  return (
+    <SegmentedControl aria-label="Reading view" defaultValue="text">
+      <SegmentedControlItem value="text">Text</SegmentedControlItem>
+      <SegmentedControlItem value="parallel">Parallel</SegmentedControlItem>
+    </SegmentedControl>
+  )
+}
+```
+
+Name the control with `aria-label`, or put it in a `Field` whose label names it. Without `defaultValue`, nothing starts checked.
+
+## Tabs or segmented control
+
+Use a segmented control to pick one value, like a form control. Use [tabs](/docs/components/tabs) to switch panels of content.
+
+## In a field
+
+<ComponentPreview name="segmented-control-field" />
+
+Put the control in a `Field` for a visible label and a description. Pass `name` on the field or the control to submit the value with a form. A disabled item is skipped by the arrow keys.
+
+## API
+
+SegmentedControl takes every UI SDK `SegmentedControl` prop. These are the ones people use most.
+
+| Prop | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `value` | `string \| null` | none | The checked item. Pass it to control the component. |
+| `defaultValue` | `string \| null` | none | The item checked at first. A form reset returns to it. |
+| `onValueChange` | `(value, details) => void` | none | Runs when the value changes. |
+| `name` | `string` | none | The name the value submits under. |
+| `disabled` | `boolean` | `false` | Disables every item. |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Which way the items run. |
+| `loop` | `boolean` | `true` | Whether arrow keys wrap around. |
+
+Each `SegmentedControlItem` takes a `value` and an optional `disabled`. See the [UI SDK reference](https://ui-sdk.dev/docs/components/segmented-control) for the rest.
+
+## Keyboard
+
+| Key | Action |
+| --- | --- |
+| Tab | Moves focus to the checked item, or the first enabled item. |
+| Arrow keys | Moves to the next or previous item and checks it. |
+| Space | Checks the focused item. |

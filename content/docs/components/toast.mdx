@@ -1,0 +1,78 @@
+---
+title: Toast
+description: A brief message after an action finishes. One shows at a time, like a status line.
+---
+
+<ComponentPreview name="toast-demo" />
+
+## Installation
+
+<Install name="toast" />
+
+## Usage
+
+Place `<Toaster />` once near the root of your app, then call `toast()` from anywhere, including outside components.
+
+```tsx title="app/layout.tsx"
+import { Toaster } from "@/components/ui/toast"
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        {children}
+        <Toaster />
+      </body>
+    </html>
+  )
+}
+```
+
+```tsx title="Usage"
+import { Button } from "@/components/ui/button"
+import { toast } from "@/components/ui/toast"
+
+export function Example() {
+  return <Button onClick={() => toast("Quote copied", { description: "Letter 1, paragraph 1" })}>Copy quote</Button>
+}
+```
+
+A new toast replaces the one showing instead of stacking. Keep messages short. Use `duration: Infinity` for a message that must stay until dismissed.
+
+## Action
+
+Add an `action` for a quick reversal like Undo. Pressing it runs `onAction` and dismisses the toast.
+
+<ComponentPreview name="toast-action" />
+
+## Types
+
+`toast.success`, `toast.error` and `toast.loading` set the type. Only `error` looks different: it uses the destructive color and is announced right away. The other types share one style. `toast.promise` shows a loading toast, then the result.
+
+<ComponentPreview name="toast-types" />
+
+## API
+
+<AutoTypeTable path="./src/components/ui/toast.tsx" name="ToasterOwnProps" />
+
+Common `toast()` options from UI SDK:
+
+| Option | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `description` | `string` | | More detail, under the title. |
+| `type` | `"success" \| "info" \| "warning" \| "error" \| "loading"` | | What it's about. Only `error` changes the style; it is also announced right away. |
+| `duration` | `number` | | How long it shows, in milliseconds. `Infinity` keeps it until dismissed. |
+| `action` | `{ label, onAction }` | | A button that does something, like Undo. |
+| `id` | `string` | | Reuses a toast: one with this id that's still showing is updated. |
+| `priority` | `"polite" \| "assertive"` | `"polite"` | How screen readers announce it. Errors are assertive. |
+| `onDismiss` | `(details) => void` | | Runs when it closes, with the reason. |
+
+Also available: `toast.update(id, options)`, `toast.dismiss(id)` and `toast.dismiss()`. See [UI SDK Toast](https://ui-sdk.dev/docs/components/toast) for the rest, including `createToaster()` for a second queue.
+
+## Keyboard
+
+| Key | Action |
+| --- | --- |
+| F6 | Moves focus to the newest toast. Press again to return. |
+| Tab | Moves through the toasts and their buttons. Past the last one, returns focus. |
+| Escape | Dismisses the focused toast and moves focus on. |

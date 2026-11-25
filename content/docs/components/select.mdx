@@ -1,0 +1,80 @@
+---
+title: Select
+description: Pick one value from a list. It looks like an input, opens a listbox and supports typeahead.
+---
+
+<ComponentPreview name="select-demo" />
+
+## Installation
+
+<Install name="select" />
+
+## Usage
+
+```tsx title="Usage"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
+export function Example() {
+  return (
+    <Select placeholder="Choose a language" defaultValue="en">
+      <SelectLabel>Reading language</SelectLabel>
+      <SelectTrigger>
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="en">English</SelectItem>
+        <SelectItem value="la">Latin</SelectItem>
+      </SelectContent>
+    </Select>
+  )
+}
+```
+
+`SelectValue` shows the chosen item's label in the trigger. Always name the trigger with a `SelectLabel`, or give `SelectTrigger` an `aria-label`. Inside a [field](/docs/components/field), use `FieldLabel`.
+
+## Groups
+
+Use `SelectGroup` and `SelectGroupLabel` to organize a long list, and `SelectSeparator` to add space between groups.
+
+<ComponentPreview name="select-groups" />
+
+## Controlled
+
+Pass `value` and `onValueChange`. Use `null` for no selection.
+
+<ComponentPreview name="select-controlled" />
+
+## API
+
+Our select adds no props of its own. It takes every UI SDK prop:
+
+| Prop | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `value` | `string \| null` | | The selected value. Pass it to control the select. |
+| `defaultValue` | `string \| null` | | The value selected at first, when uncontrolled. |
+| `onValueChange` | `(value, details) => void` | | Runs when the value wants to change. |
+| `placeholder` | `string` | | What the value shows while nothing is selected. |
+| `items` | `string[] \| { value, label }[]` | | Options as data. Renders the list for you. |
+| `multiple` | `boolean` | `false` | Whether several items can be selected. The value is then a list. |
+| `name` | `string` | | The name the value submits under in a form. |
+| `disabled` | `boolean` | `false` | Disables the select like a native one. |
+
+See [UI SDK Select](https://ui-sdk.dev/docs/components/select) for the rest, including search, async options and `required`.
+
+## Keyboard
+
+| Key | Action |
+| --- | --- |
+| Enter, Space, ArrowDown | On the trigger, opens the list and focuses the first item. |
+| ArrowDown, ArrowUp | Moves through the open list. |
+| Home, End | Moves to the first or last item. |
+| Letters | Moves to the next item that starts with what you type. |
+| Enter | Chooses the focused item and closes the list. |
+| Escape | Closes the list and returns focus to the trigger. |

@@ -1,0 +1,69 @@
+---
+title: Popover
+description: A small panel anchored to its trigger, for content that needs a moment of attention but not the whole page.
+---
+
+<ComponentPreview name="popover-demo" />
+
+## Installation
+
+<Install name="popover" />
+
+## Usage
+
+```tsx title="Usage"
+import { Button } from "@/components/ui/button"
+import { Popover, PopoverContent, PopoverDescription, PopoverTitle, PopoverTrigger } from "@/components/ui/popover"
+
+export function Example() {
+  return (
+    <Popover>
+      <PopoverTrigger render={<Button />}>Show footnote</PopoverTrigger>
+      <PopoverContent>
+        <PopoverTitle>Letter 1, on time</PopoverTitle>
+        <PopoverDescription>Nothing is truly ours except time.</PopoverDescription>
+      </PopoverContent>
+    </Popover>
+  )
+}
+```
+
+A popover has the dialog role, so give it a `PopoverTitle`. Unlike a tooltip, it can hold buttons and fields.
+
+## Form
+
+Use `PopoverClose` for actions that dismiss the popover. Focus moves to the first field on open and returns to the trigger on close.
+
+<ComponentPreview name="popover-form" />
+
+## Placement
+
+`side` picks the edge of the trigger. The popover flips to the other side when there isn't room. `align` and `sideOffset` fine-tune the position.
+
+<ComponentPreview name="popover-placement" />
+
+## API
+
+Our popover adds no props of its own. It takes every UI SDK prop:
+
+| Prop | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `open` | `boolean` | | Whether the popover is open. Pass it to control the popover. |
+| `onOpenChange` | `(open, details) => void` | | Runs when the popover wants to open or close. |
+| `modal` | `boolean \| "trap-focus"` | `false` | `true` traps focus and makes the page inert. |
+| `openOnHover` | `boolean` | `false` | Opens when the pointer rests on the trigger. Pressing it still works. |
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"bottom"` | On `PopoverContent`. Which side of the trigger it opens on. |
+| `align` | `"start" \| "center" \| "end"` | `"center"` | On `PopoverContent`. How it lines up along that side. |
+| `sideOffset` | `number` | | On `PopoverContent`. Gap to the trigger, in pixels. |
+| `initialFocus` | `PopoverInitialFocus` | first focusable | On `PopoverContent`. Where focus goes on open. |
+
+See [UI SDK Popover](https://ui-sdk.dev/docs/components/popover) for the rest, including controllers and triggers outside the popover.
+
+## Keyboard
+
+| Key | Action |
+| --- | --- |
+| Enter, Space | On the trigger, opens the popover. |
+| Tab | Moves through the popover. Tabbing past the last control closes it. |
+| Shift+Tab | From the first control, returns focus to the trigger. |
+| Escape | Closes the popover and returns focus to the trigger. |

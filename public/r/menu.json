@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "menu",
+  "title": "Menu",
+  "description": "Actions from a button or a right click, with items, checkboxes and submenus.",
+  "dependencies": [
+    "@ui-sdk/react",
+    "@ui-sdk/core"
+  ],
+  "registryDependencies": [
+    "@yanisneverlies/theme",
+    "@yanisneverlies/utils",
+    "@yanisneverlies/popup-classes"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/menu.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  Menu,\n  MenuContent as MenuContentPart,\n  MenuGroup,\n  MenuGroupLabel as MenuGroupLabelPart,\n  MenuItem as MenuItemPart,\n  MenuSeparator as MenuSeparatorPart,\n  MenuShortcut as MenuShortcutPart,\n  MenuTrigger,\n} from \"@ui-sdk/react/menu\"\n\nimport { cn, cx } from \"@/lib/utils\"\nimport { popupMotion, popupSurface } from \"./popup-classes\"\n\n/** Items sit 4px inside an 12px-radius surface, so their 8px corners stay concentric with it. */\nfunction MenuContent({ className, ...props }: React.ComponentProps<typeof MenuContentPart>) {\n  return (\n    <MenuContentPart\n      className={cx(\n        cn(\n          popupSurface,\n          popupMotion,\n          \"flex max-h-(--available-height) min-w-48 flex-col overflow-y-auto overscroll-contain rounded-lg p-1\"\n        ),\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\ntype MenuItemProps = React.ComponentProps<typeof MenuItemPart>\n\n/** Pass UI SDK's `destructive` for items that remove something; it sets `data-destructive`. */\nfunction MenuItem({ className, ...props }: MenuItemProps) {\n  return (\n    <MenuItemPart\n      className={cx(\n        cn(\n          \"flex h-9 cursor-default items-center gap-2 rounded-sm px-2 text-body outline-none select-none\",\n          \"data-highlighted:bg-accent data-disabled:opacity-45 data-pending:opacity-70\",\n          \"[&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-muted-foreground\",\n          \"data-destructive:text-destructive data-destructive:data-highlighted:bg-destructive-soft data-destructive:[&_svg]:text-destructive\"\n        ),\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction MenuGroupLabel({ className, ...props }: React.ComponentProps<typeof MenuGroupLabelPart>) {\n  return <MenuGroupLabelPart className={cx(\"px-2 pt-2 pb-1 text-small text-muted-foreground\", className)} {...props} />\n}\n\n/** Separates groups with space, not a line. */\nfunction MenuSeparator({ className, ...props }: React.ComponentProps<typeof MenuSeparatorPart>) {\n  return <MenuSeparatorPart className={cx(\"h-2 shrink-0\", className)} {...props} />\n}\n\nfunction MenuShortcut({ className, ...props }: React.ComponentProps<typeof MenuShortcutPart>) {\n  return <MenuShortcutPart className={cx(\"ms-auto ps-4 text-small text-muted-foreground in-data-highlighted:text-soft-foreground tnum\", className)} {...props} />\n}\n\nexport {\n  Menu,\n  MenuTrigger,\n  MenuContent,\n  MenuGroup,\n  MenuGroupLabel,\n  MenuItem,\n  MenuSeparator,\n  MenuShortcut,\n  type MenuItemProps,\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

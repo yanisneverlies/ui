@@ -1,0 +1,66 @@
+---
+title: Button
+description: Six variants, three sizes plus icon sizes, a render prop, a pending state, and an optional sound.
+---
+
+<ComponentPreview name="button-demo" />
+
+## Installation
+
+<Install name="button" />
+
+## Playground
+
+<ButtonPlayground />
+
+## Usage
+
+```tsx title="Usage"
+import { Button } from "@/components/ui/button"
+
+<Button variant="primary">Save changes</Button>
+```
+
+Use `primary` once per screen, for the action that matters. The default is `secondary`.
+
+## Variants
+
+<ComponentPreview name="button-variants" />
+
+`tonal` is for buttons on a muted surface, like a shell card's footer, where `secondary` would disappear. `destructive` is for actions that remove something.
+
+## Sizes
+
+<ComponentPreview name="button-sizes" />
+
+Icon sizes are square. Give them an `aria-label`.
+
+## As a link
+
+Pass your element to `render` to give a link the button's styles. The button renders that element instead of a `<button>`.
+
+```tsx title="Usage"
+<Button render={<Link href="/docs/components/card" />}>Next: Card</Button>
+```
+
+<ComponentPreview name="button-as-child" />
+
+## Pending
+
+Return a Promise from `onClick`. The button shows as pending (`data-pending` and `aria-busy`) and ignores repeat presses until the Promise settles.
+
+```tsx title="Usage"
+<Button onClick={() => saveChanges()}>Save changes</Button>
+```
+
+## Sound
+
+<ComponentPreview name="button-sound" />
+
+Silent unless you pass a cue, and only while sound is on. See [Sound](/docs/sound).
+
+## API
+
+<AutoTypeTable path="./src/components/ui/button.tsx" name="ButtonOwnProps" />
+
+Button also takes every native `<button>` prop. It sets `type="button"` unless you pass another type.

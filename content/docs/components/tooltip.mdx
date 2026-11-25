@@ -1,0 +1,69 @@
+---
+title: Tooltip
+description: A short text hint on hover or focus. It names an icon button or adds a detail to a labeled one.
+---
+
+<ComponentPreview name="tooltip-demo" />
+
+## Installation
+
+<Install name="tooltip" />
+
+## Usage
+
+```tsx title="Usage"
+import { Copy } from "lucide-react"
+
+import { Button } from "@/components/ui/button"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+
+export function Example() {
+  return (
+    <Tooltip>
+      <TooltipTrigger render={<Button size="icon" aria-label="Copy quote" />}>
+        <Copy />
+      </TooltipTrigger>
+      <TooltipContent>Copy quote</TooltipContent>
+    </Tooltip>
+  )
+}
+```
+
+Keep the content to plain text. A tooltip can't take focus, so a link or button inside it can't be reached. For anything interactive, use a [popover](/docs/components/popover).
+
+## Shortcut
+
+Pass `shortcut` to `Tooltip` and add a `TooltipShortcut` to show the keys. The tooltip only shows the hint. Your app binds the keys.
+
+<ComponentPreview name="tooltip-shortcut" />
+
+## Side
+
+`side` defaults to `top` and flips when there isn't room.
+
+<ComponentPreview name="tooltip-side" />
+
+## API
+
+Our tooltip adds no props of its own. It takes every UI SDK prop:
+
+| Prop | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `delay` | `number` | | Milliseconds the pointer rests on the trigger before it opens. |
+| `closeDelay` | `number` | | Milliseconds before it closes after the pointer leaves. |
+| `disabled` | `boolean` | `false` | Stops the tooltip from opening. The trigger keeps working. |
+| `type` | `"label" \| "description"` | guessed | Whether it names the trigger or describes it. An icon-only trigger is named. |
+| `shortcut` | `string` | | The keys of what the trigger does, like `"mod+s"`. Shown by `TooltipShortcut`. |
+| `closeOnPress` | `boolean` | `true` | Whether pressing the trigger closes the tooltip. |
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"top"` | On `TooltipContent`. Which side of the trigger it opens on. |
+| `align` | `"start" \| "center" \| "end"` | `"center"` | On `TooltipContent`. How it lines up along that side. |
+
+See [UI SDK Tooltip](https://ui-sdk.dev/docs/components/tooltip) for the rest, including `toggleable` for touch screens.
+
+## Keyboard
+
+| Key | Action |
+| --- | --- |
+| Tab | Focus on the trigger opens the tooltip. Focus leaving closes it. |
+| Escape | Closes the tooltip and leaves focus on the trigger. A dialog or menu around it stays open. |
+| Enter, Space | Presses the trigger and closes the tooltip. |

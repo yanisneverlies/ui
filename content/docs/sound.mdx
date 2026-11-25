@@ -1,0 +1,52 @@
+---
+title: Sound
+description: Opt-in interaction cues through cuelume. Off until you turn them on.
+---
+
+Sound is off by default. Without a `SoundProvider`, every component stays silent.
+
+<ComponentPreview name="sound-toggle" />
+
+## Turn it on
+
+Wrap your app in `SoundProvider`, and give people a visible way to mute it:
+
+```tsx title="app/layout.tsx"
+import { SoundProvider } from "@/lib/sound"
+
+export default function Layout({ children }) {
+  return <SoundProvider>{children}</SoundProvider>
+}
+```
+
+The provider remembers the reader's choice in `localStorage` under `ui:sound`. Set `storageKey={null}` to forget it on reload, or `defaultEnabled` to start with sound on.
+
+## Give a component a cue
+
+Components take a `sound` prop: a [cuelume](https://github.com/Danilaa1/cuelume) cue name, a cue with options, or `false`.
+
+<ComponentPreview name="button-sound" />
+
+Buttons are silent unless you give them a cue. A switch plays `toggle` by default.
+
+## Where sound belongs
+
+Use a cue to confirm something the person just did: a copy, a save, a toggle. Don't play one on hover or on page load, and don't repeat one for an error.
+
+| Moment | Cue |
+| --- | --- |
+| Copy to clipboard | `{ name: "success", emphasis: "subtle" }` |
+| Switch or checkbox | `toggle` (the default) |
+| Destructive confirm | `{ name: "close", emphasis: "strong" }` |
+| Menu option | `select` |
+
+## Play a cue from code
+
+```tsx title="Usage"
+const { play } = useSound()
+
+await save()
+play({ name: "success", emphasis: "subtle" })
+```
+
+`play` does nothing while sound is off, so you never need to check first.

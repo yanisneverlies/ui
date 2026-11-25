@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "select",
+  "title": "Select",
+  "description": "Choose one or several from a popup list.",
+  "dependencies": [
+    "@ui-sdk/react",
+    "@ui-sdk/core",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "@yanisneverlies/theme",
+    "@yanisneverlies/utils",
+    "@yanisneverlies/popup-classes"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/select.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  Select,\n  SelectContent as SelectContentPart,\n  SelectGroup,\n  SelectGroupLabel as SelectGroupLabelPart,\n  SelectItem as SelectItemPart,\n  SelectItemIndicator,\n  SelectItemText,\n  SelectLabel as SelectLabelPart,\n  SelectSeparator as SelectSeparatorPart,\n  SelectTrigger as SelectTriggerPart,\n  SelectValue as SelectValuePart,\n} from \"@ui-sdk/react/select\"\nimport { Check, ChevronDown } from \"lucide-react\"\n\nimport { cn, cx } from \"@/lib/utils\"\nimport { popupMotion, popupSurface } from \"./popup-classes\"\n\nfunction SelectLabel({ className, ...props }: React.ComponentProps<typeof SelectLabelPart>) {\n  return <SelectLabelPart className={cx(\"text-small font-medium data-disabled:opacity-45\", className)} {...props} />\n}\n\n/** Looks like an input: same height, same 3:1 border. Holds a SelectValue and a chevron. */\nfunction SelectTrigger({ className, children, ...props }: React.ComponentProps<typeof SelectTriggerPart>) {\n  return (\n    <SelectTriggerPart\n      className={cx(\n        cn(\n          \"pressable flex h-10 w-full min-w-0 items-center justify-between gap-2 rounded-lg border border-input bg-background px-3 text-start text-body\",\n          \"data-disabled:opacity-45 data-open:bg-secondary [[data-invalid]_&]:border-destructive\"\n        ),\n        className\n      )}\n      {...props}\n    >\n      {(state) => (\n        <>\n          {typeof children === \"function\" ? children(state) : children}\n          <ChevronDown aria-hidden=\"true\" className=\"size-4 shrink-0 text-muted-foreground\" />\n        </>\n      )}\n    </SelectTriggerPart>\n  )\n}\n\nfunction SelectValue({ className, ...props }: React.ComponentProps<typeof SelectValuePart>) {\n  return <SelectValuePart className={cx(\"min-w-0 truncate data-placeholder:text-muted-foreground\", className)} {...props} />\n}\n\nfunction SelectContent({ className, ...props }: React.ComponentProps<typeof SelectContentPart>) {\n  return (\n    <SelectContentPart\n      className={cx(\n        cn(\n          popupSurface,\n          popupMotion,\n          \"flex max-h-[min(320px,var(--available-height))] min-w-(--anchor-width) flex-col overflow-y-auto overscroll-contain rounded-lg p-1\"\n        ),\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\n/** Text plus a check that shows on the selected item. */\nfunction SelectItem({ className, children, ...props }: React.ComponentProps<typeof SelectItemPart>) {\n  return (\n    <SelectItemPart\n      className={cx(\n        \"flex h-9 cursor-default items-center gap-2 rounded-sm ps-2 pe-8 text-body outline-none select-none relative data-highlighted:bg-accent data-disabled:opacity-45\",\n        className\n      )}\n      {...props}\n    >\n      {(state) => (\n        <>\n          <SelectItemText className=\"min-w-0 truncate\">\n            {typeof children === \"function\" ? children(state) : children}\n          </SelectItemText>\n          <SelectItemIndicator className=\"absolute end-2 grid size-4 place-items-center text-foreground\">\n            <Check className=\"size-4\" aria-hidden=\"true\" />\n          </SelectItemIndicator>\n        </>\n      )}\n    </SelectItemPart>\n  )\n}\n\nfunction SelectGroupLabel({ className, ...props }: React.ComponentProps<typeof SelectGroupLabelPart>) {\n  return <SelectGroupLabelPart className={cx(\"px-2 pt-2 pb-1 text-small text-muted-foreground\", className)} {...props} />\n}\n\nfunction SelectSeparator({ className, ...props }: React.ComponentProps<typeof SelectSeparatorPart>) {\n  return <SelectSeparatorPart className={cx(\"h-2 shrink-0\", className)} {...props} />\n}\n\nexport {\n  Select,\n  SelectLabel,\n  SelectTrigger,\n  SelectValue,\n  SelectContent,\n  SelectGroup,\n  SelectGroupLabel,\n  SelectItem,\n  SelectSeparator,\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,0 +1,41 @@
+---
+title: Theming
+description: Every color, corner, and type size is a token in ui.css.
+---
+
+All tokens live in `styles/ui.css`. They use shadcn's names, so `bg-background`, `text-muted-foreground`, and `bg-primary` mean the same thing here as in any shadcn project.
+
+## Colors
+
+| Token | Light | Use |
+| --- | --- | --- |
+| `--background` | `#fbfaf9` | Page |
+| `--foreground` | `#121212` | Body text |
+| `--muted-foreground` | `#6e6e6d` | Supporting text |
+| `--primary` | `#dd3400` | The one main action. White text on it is 4.6:1. |
+| `--brand` | `#ff3e00` | Current position, selection, marks. Never under text. |
+| `--brand-strong` | `#c62e00` | The brand orange where it is text, such as an active link |
+| `--destructive` | `oklch(0.52 0.15 20)` | Errors and failures only |
+
+There are also `success`, `warning`, and `info`, each with a `-soft` background, and `soft-foreground` and `faint-foreground` between body and supporting text.
+
+## Dark mode
+
+Dark values apply under `.dark` or `[data-theme="dark"]` on any ancestor, usually `<html>`. That works with `next-themes` and with a plain attribute switch.
+
+## Corners
+
+One variable, `--radius`, drives every corner. At its default of `12px`:
+
+| Class | Value | Used by |
+| --- | --- | --- |
+| `rounded-xs` | 6px | Badge, Kbd |
+| `rounded-sm` | 8px | Small buttons |
+| `rounded-lg` | 12px | Buttons, card panels |
+| Card frame | 20px | `--radius` plus the frame's 8px inset |
+
+A shell card adds its inset to `--radius`, so the panel inside and the button in its footer share one curve. Change the inset on one card with `className="[--card-inset:12px]"`.
+
+## Type
+
+Four sizes cover most screens: `text-small` (13px), `text-body` (15px), `text-lead` (17px), and `text-title` (20px), plus `text-display` for page headings. Use `tnum` on numbers that change or line up.

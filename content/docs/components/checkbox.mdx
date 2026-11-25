@@ -1,0 +1,67 @@
+---
+title: Checkbox
+description: A checkbox with a 3:1 edge so an empty box is visible, and a toggle cue when sound is on.
+---
+
+<ComponentPreview name="checkbox-demo" />
+
+## Installation
+
+<Install name="checkbox" />
+
+## Usage
+
+```tsx title="Usage"
+import { Checkbox } from "@/components/ui/checkbox"
+
+export function FootnotesOption() {
+  return (
+    <label className="inline-flex items-center gap-2">
+      <Checkbox defaultChecked />
+      Show footnotes
+    </label>
+  )
+}
+```
+
+Wrap the checkbox and its text in a `<label>`, so a click on the text toggles it too. A checkbox with no visible text needs an `aria-label`.
+
+## Group and select all
+
+<ComponentPreview name="checkbox-group" />
+
+`CheckboxGroup` keeps one list of checked values. Add a checkbox with `parent` to check or uncheck the whole group. It shows a minus when only some are checked. Pass `allValues` to the group so the parent renders correctly on the server.
+
+## In a field
+
+<ComponentPreview name="checkbox-field" />
+
+Inside a `Field`, the checkbox sits beside its label and the description wraps below. Set `invalid` on the field to show the error and a destructive edge on the box.
+
+## Sound
+
+A checkbox plays `toggle` when sound is on, going up when it checks and down when it unchecks. Pass `sound={false}` to silence it.
+
+## API
+
+<AutoTypeTable path="./src/components/ui/checkbox.tsx" name="CheckboxOwnProps" />
+
+Checkbox also takes every UI SDK `Checkbox` prop. These are the ones people use most.
+
+| Prop | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `checked` | `boolean \| "indeterminate"` | none | Whether it's checked. Pass `"indeterminate"` for the mixed state of a partly checked set. Controls the checkbox. |
+| `defaultChecked` | `boolean \| "indeterminate"` | `false` | Whether it's checked at first. |
+| `onCheckedChange` | `(checked, details) => void` | none | Runs when the state changes. |
+| `parent` | `boolean` | `false` | Makes it the select-all checkbox of its `CheckboxGroup`. |
+| `name`, `value` | `string` | none | What it submits, and under which name. |
+| `disabled`, `readOnly`, `required` | `boolean` | `false` | Native form behavior. |
+
+See the [UI SDK reference](https://ui-sdk.dev/docs/components/checkbox) for the rest.
+
+## Keyboard
+
+| Key | Action |
+| --- | --- |
+| Tab | Moves focus to the checkbox. |
+| Space | Checks or unchecks it. A mixed checkbox becomes checked. |

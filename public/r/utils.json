@@ -10,7 +10,7 @@
   "files": [
     {
       "path": "src/lib/utils.ts",
-      "content": "import { clsx, type ClassValue } from \"clsx\"\nimport { extendTailwindMerge } from \"tailwind-merge\"\n\n// Teach tailwind-merge the custom type scale, so `text-small` and `text-muted` don't cancel each other.\nconst twMerge = extendTailwindMerge({\n  extend: {\n    classGroups: {\n      \"font-size\": [{ text: [\"micro\", \"small\", \"body\", \"lead\", \"title\", \"display\"] }],\n    },\n  },\n})\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs))\n}\n",
+      "content": "import { clsx, type ClassValue } from \"clsx\"\nimport { extendTailwindMerge } from \"tailwind-merge\"\n\n// Teach tailwind-merge the custom type scale, so `text-small` and `text-muted` don't cancel each other.\nconst twMerge = extendTailwindMerge({\n  extend: {\n    classGroups: {\n      \"font-size\": [{ text: [\"micro\", \"small\", \"body\", \"lead\", \"title\", \"display\"] }],\n    },\n  },\n})\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs))\n}\n\ntype ClassName<State> = string | ((state: State) => string | undefined) | undefined\n\n/**\n * Prepends a component's own classes to the className a caller passes, keeping UI SDK's support for\n * className as a function of the part's state.\n */\nexport function cx<State>(base: string, className?: ClassName<State>) {\n  return typeof className === \"function\" ? (state: State) => cn(base, className(state)) : cn(base, className)\n}\n",
       "type": "registry:lib"
     }
   ],

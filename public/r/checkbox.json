@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "checkbox",
+  "title": "Checkbox",
+  "description": "Choose independent options, with groups and an indeterminate state. Plays the toggle cue when sound is on.",
+  "dependencies": [
+    "@ui-sdk/react",
+    "@ui-sdk/core",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "@yanisneverlies/theme",
+    "@yanisneverlies/utils",
+    "@yanisneverlies/sound"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/checkbox.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Checkbox as CheckboxPart, CheckboxGroup, CheckboxIndicator } from \"@ui-sdk/react/checkbox\"\nimport { Check, Minus } from \"lucide-react\"\n\nimport { cx } from \"@/lib/utils\"\nimport { useSound, type SoundProp } from \"@/lib/sound\"\n\n/** Checkbox's own props. It also takes every UI SDK Checkbox prop: `checked`, `defaultChecked`, `onCheckedChange`, `disabled`, `name`, `value`. The mixed state is a value, not a prop: pass `checked=\"indeterminate\"` or `defaultChecked=\"indeterminate\"`. */\ninterface CheckboxOwnProps {\n  /**\n   * Cue played when it flips, if sound is on. `false` silences it.\n   * @defaultValue \"toggle\"\n   */\n  sound?: SoundProp\n}\n\ntype CheckboxProps = Omit<React.ComponentProps<typeof CheckboxPart>, \"children\"> & CheckboxOwnProps\n\n/** Its edge is the 3:1 input border, the one place a border is needed: an empty box must be visible. */\nfunction Checkbox({ className, sound = \"toggle\", onCheckedChange, ...props }: CheckboxProps) {\n  const { play } = useSound()\n  return (\n    <CheckboxPart\n      className={cx(\n        \"pressable relative grid size-5 shrink-0 place-items-center rounded-xs border border-input bg-background text-background after:absolute after:-inset-1 pointer-coarse:after:-inset-3 after:content-[''] data-checked:border-foreground data-checked:bg-foreground data-indeterminate:border-foreground data-indeterminate:bg-foreground data-disabled:opacity-45 [[data-invalid]_&]:border-destructive\",\n        className\n      )}\n      onCheckedChange={(checked, details) => {\n        onCheckedChange?.(checked, details)\n        play(sound, { direction: checked ? \"forward\" : \"back\" })\n      }}\n      {...props}\n    >\n      <CheckboxIndicator className=\"grid place-items-center transition-opacity duration-150 ease-(--ease-out) data-starting-style:opacity-0 data-ending-style:opacity-0\">\n        {(state) =>\n          state.indeterminate ? (\n            <Minus className=\"size-3.5\" strokeWidth={2.5} aria-hidden=\"true\" />\n          ) : (\n            <Check className=\"size-3.5\" strokeWidth={2.5} aria-hidden=\"true\" />\n          )\n        }\n      </CheckboxIndicator>\n    </CheckboxPart>\n  )\n}\n\nexport { Checkbox, CheckboxGroup, type CheckboxProps, type CheckboxOwnProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

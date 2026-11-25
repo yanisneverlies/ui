@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "popover",
+  "title": "Popover",
+  "description": "Floating content beside its trigger, for editing or exploring in place.",
+  "dependencies": [
+    "@ui-sdk/react",
+    "@ui-sdk/core"
+  ],
+  "registryDependencies": [
+    "@yanisneverlies/theme",
+    "@yanisneverlies/utils",
+    "@yanisneverlies/popup-classes"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/popover.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  Popover,\n  PopoverClose,\n  PopoverContent as PopoverContentPart,\n  PopoverDescription as PopoverDescriptionPart,\n  PopoverTitle as PopoverTitlePart,\n  PopoverTrigger,\n} from \"@ui-sdk/react/popover\"\n\nimport { cn, cx } from \"@/lib/utils\"\nimport { popupMotion, popupSurface } from \"./popup-classes\"\n\nfunction PopoverContent({ className, ...props }: React.ComponentProps<typeof PopoverContentPart>) {\n  return (\n    <PopoverContentPart\n      className={cx(\n        cn(popupSurface, popupMotion, \"flex w-72 max-w-[calc(100vw-16px)] flex-col gap-2 rounded-lg p-4\"),\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction PopoverTitle({ className, ...props }: React.ComponentProps<typeof PopoverTitlePart>) {\n  return <PopoverTitlePart className={cx(\"text-body font-medium\", className)} {...props} />\n}\n\nfunction PopoverDescription({ className, ...props }: React.ComponentProps<typeof PopoverDescriptionPart>) {\n  return <PopoverDescriptionPart className={cx(\"text-small text-muted-foreground\", className)} {...props} />\n}\n\nexport { Popover, PopoverTrigger, PopoverContent, PopoverTitle, PopoverDescription, PopoverClose }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

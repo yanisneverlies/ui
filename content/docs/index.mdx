@@ -1,0 +1,22 @@
+---
+title: Introduction
+description: Accessible React components you copy into your project and own.
+---
+
+`ui` is a small set of React components with one design language: warm neutrals, a single orange for the action that matters, concentric corners, and sound that stays off until you turn it on.
+
+It works the way [shadcn/ui](https://ui.shadcn.com) does. The CLI copies each component's source into your project, so you can read it, change it, and never wait on a package update. The token names match shadcn's, so these components sit next to any shadcn component without a clash.
+
+<Cards>
+  <Card title="Installation" href="/docs/installation" description="Add the registry and your first component." />
+  <Card title="Theming" href="/docs/theming" description="Tokens, dark mode, and the one knob for corners." />
+  <Card title="Sound" href="/docs/sound" description="Opt-in interaction cues, and where they belong." />
+  <Card title="Button" href="/docs/components/button" description="Start with the component you'll use most." />
+</Cards>
+
+## What's inside
+
+- **Built on UI SDK and Tailwind CSS v4.** Focus, keyboard support, ARIA and popups come from [UI SDK](https://ui-sdk.dev); styling is plain utility classes you can edit.
+- **AA contrast in both themes.** Every text pair passes WCAG AA in light and dark.
+- **18 components:** Button, Card, Badge, Kbd, Switch, Dialog, Popover, Tooltip, Menu, Select, Toast, Tabs, Segmented control, Accordion, Checkbox, Input, Field, and Textarea. Each one has a live example and an API table generated from its TypeScript types.
+- **Made for agents too.** The docs publish [/llms.txt](/llms.txt), and an agent skill teaches a coding agent how to use the library. Install it with `npx skills add yanisneverlies/ui`.

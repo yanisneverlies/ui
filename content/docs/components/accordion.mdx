@@ -1,0 +1,64 @@
+---
+title: Accordion
+description: Stacked sections that open and close, each a tinted surface separated by space.
+---
+
+<ComponentPreview name="accordion-demo" />
+
+## Installation
+
+<Install name="accordion" />
+
+## Usage
+
+```tsx title="Usage"
+import { Accordion, AccordionItem, AccordionPanel, AccordionTrigger } from "@/components/ui/accordion"
+
+export function Notes() {
+  return (
+    <Accordion>
+      <AccordionItem value="theme">
+        <AccordionTrigger>What is Letter 1 about?</AccordionTrigger>
+        <AccordionPanel>Time, and taking it back.</AccordionPanel>
+      </AccordionItem>
+    </Accordion>
+  )
+}
+```
+
+The value is always an array of open item values, even when only one item can be open.
+
+## Multiple
+
+<ComponentPreview name="accordion-multiple" />
+
+Add `multiple` to keep several items open. Without it, opening one closes the others.
+
+## Heading level
+
+The trigger renders inside an `h3`. Match the heading level to the page around it with `level`, like `<AccordionTrigger level={2}>`.
+
+## API
+
+Accordion takes every UI SDK `Accordion` prop. These are the ones people use most.
+
+| Prop | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `value` | `string[]` | none | The open items. Pass it to control the accordion. |
+| `defaultValue` | `string[]` | `[]` | The items open at first. |
+| `onValueChange` | `(value, details) => void` | none | Runs when items open or close. |
+| `multiple` | `boolean` | `false` | Whether several items can be open at once. |
+| `collapsible` | `boolean` | `true` | Whether the open item can close when only one may be open. |
+| `disabled` | `boolean` | `false` | Stops every item from opening or closing. |
+| `keepMounted` | `boolean` | `false` | Keep closed panels in the page, hidden. |
+
+`AccordionItem` takes a `value` and its own `disabled`. See the [UI SDK reference](https://ui-sdk.dev/docs/components/accordion) for the rest.
+
+## Keyboard
+
+| Key | Action |
+| --- | --- |
+| Tab | Moves focus to the next trigger. |
+| Enter, Space | Opens or closes the focused item. |
+
+Arrow keys, Home and End do nothing here. A screen reader's heading navigation reaches each trigger.

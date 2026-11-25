@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "segmented-control",
+  "title": "Segmented control",
+  "description": "A compact row of mutually exclusive options.",
+  "dependencies": [
+    "@ui-sdk/react",
+    "@ui-sdk/core"
+  ],
+  "registryDependencies": [
+    "@yanisneverlies/theme",
+    "@yanisneverlies/utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/segmented-control.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  SegmentedControl as SegmentedControlPart,\n  SegmentedControlIndicator,\n  SegmentedControlItem as SegmentedControlItemPart,\n} from \"@ui-sdk/react/segmented-control\"\n\nimport { cx } from \"@/lib/utils\"\n\n/** A single choice among a few, like a view switch. Brings its own indicator, which slides to the checked item. */\nfunction SegmentedControl({ className, children, ...props }: React.ComponentProps<typeof SegmentedControlPart>) {\n  return (\n    <SegmentedControlPart\n      className={cx(\"relative inline-flex max-w-full items-center gap-1 rounded-lg bg-secondary p-1 data-disabled:opacity-45\", className)}\n      {...props}\n    >\n      {(state) => (\n        <>\n          <SegmentedControlIndicator className=\"absolute top-(--segmented-control-indicator-top) left-(--segmented-control-indicator-left) h-(--segmented-control-indicator-height) w-(--segmented-control-indicator-width) rounded-sm bg-background shadow-raised transition-[left,top,width,height] duration-200 ease-(--ease-out) data-[activation-direction=none]:transition-none motion-reduce:transition-none\" />\n          {typeof children === \"function\" ? children(state) : children}\n        </>\n      )}\n    </SegmentedControlPart>\n  )\n}\n\nfunction SegmentedControlItem({ className, ...props }: React.ComponentProps<typeof SegmentedControlItemPart>) {\n  return (\n    <SegmentedControlItemPart\n      className={cx(\n        \"relative z-10 inline-flex h-8 min-w-0 pointer-coarse:after:absolute pointer-coarse:after:inset-x-0 pointer-coarse:after:-inset-y-1.5 pointer-coarse:after:content-['']  flex-1 items-center justify-center gap-2 rounded-sm px-3 text-small font-medium whitespace-nowrap text-muted-foreground transition-colors duration-150 hover:text-foreground data-checked:text-foreground data-disabled:opacity-45 [&_svg]:size-4\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { SegmentedControl, SegmentedControlItem }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,0 +1,75 @@
+---
+title: Menu
+description: A list of actions behind a button, with arrow-key navigation, typeahead and shortcut hints.
+---
+
+<ComponentPreview name="menu-demo" />
+
+## Installation
+
+<Install name="menu" />
+
+## Usage
+
+```tsx title="Usage"
+import { Button } from "@/components/ui/button"
+import { Menu, MenuContent, MenuItem, MenuTrigger } from "@/components/ui/menu"
+
+export function Example() {
+  return (
+    <Menu onAction={(value) => console.log(value)}>
+      <MenuTrigger render={<Button />}>Passage actions</MenuTrigger>
+      <MenuContent>
+        <MenuItem value="copy-quote">Copy quote</MenuItem>
+        <MenuItem value="highlight">Highlight</MenuItem>
+        <MenuItem value="delete" destructive>Delete highlight</MenuItem>
+      </MenuContent>
+    </Menu>
+  )
+}
+```
+
+Give each item a `value` and handle `onAction` on the menu. Pass `destructive` for items that remove something.
+
+## Groups
+
+Group related items with `MenuGroup` and `MenuGroupLabel`. `MenuSeparator` adds space between groups and is not a focus stop. An item's `shortcut` shows a hint that reads Command on Apple platforms and Control elsewhere.
+
+<ComponentPreview name="menu-groups" />
+
+## Pending items
+
+Return a promise from `onSelect`. The item shows as pending, the menu stays open, and it closes once the promise resolves.
+
+<ComponentPreview name="menu-pending" />
+
+## API
+
+Menu adds no props of its own. `destructive` on `MenuItem` comes from UI SDK and sets `data-destructive`.
+
+Common UI SDK options:
+
+| Prop | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `onAction` | `(value, details) => unknown` | | On `Menu`. Runs for every plain item with its `value`. A returned promise keeps the item pending. |
+| `loop` | `boolean` | `true` | On `Menu`. Whether arrow keys wrap from the last item to the first. |
+| `open` | `boolean` | | On `Menu`. Whether the menu is open. Pass it to control the menu. |
+| `value` | `string` | | On `MenuItem`. Passed to `onAction` when the item runs. |
+| `shortcut` | `string` | | On `MenuItem`. A hint like `"mod+n"`. Your app binds the keys. |
+| `disabled` | `boolean` | `false` | On `MenuItem`. Keeps the item focusable but stops it from running. |
+| `closeOnSelect` | `boolean` | `true` | On `MenuItem`. Whether running the item closes the menu. |
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"bottom"` | On `MenuContent`. Which side of the trigger it opens on. |
+
+See [UI SDK Menu](https://ui-sdk.dev/docs/components/menu) for the rest, including submenus, checkbox and radio items, and context menus.
+
+## Keyboard
+
+| Key | Action |
+| --- | --- |
+| Enter, Space, ArrowDown | On the trigger, opens the menu and focuses the first item. |
+| ArrowUp | On the trigger, opens the menu and focuses the last item. |
+| ArrowDown, ArrowUp | Moves between items. Separators and labels are skipped. |
+| Home, End | Moves to the first or last item. |
+| Letters | Moves to the next item that starts with what you type. |
+| Enter | Runs the focused item, closes the menu and returns focus. |
+| Escape | Closes the menu and returns focus to the trigger. |

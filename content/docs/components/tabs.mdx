@@ -1,0 +1,73 @@
+---
+title: Tabs
+description: Switch between panels of content, with a raised pill that slides to the selected tab.
+---
+
+<ComponentPreview name="tabs-demo" />
+
+## Installation
+
+<Install name="tabs" />
+
+## Usage
+
+```tsx title="Usage"
+import { Tabs, TabsList, TabsPanel, TabsTab } from "@/components/ui/tabs"
+
+export function Letter() {
+  return (
+    <Tabs defaultValue="text">
+      <TabsList aria-label="Letter 1">
+        <TabsTab value="text">Text</TabsTab>
+        <TabsTab value="analysis">Analysis</TabsTab>
+      </TabsList>
+      <TabsPanel value="text">Hold every hour in your grasp.</TabsPanel>
+      <TabsPanel value="analysis">Seneca opens with a plain instruction.</TabsPanel>
+    </Tabs>
+  )
+}
+```
+
+Give each tab and its panel the same `value`, and give the list an accessible name.
+
+## Tabs or segmented control
+
+Use tabs to switch panels of content. Use a [segmented control](/docs/components/segmented-control) to pick one value, like a form control.
+
+## Icons
+
+<ComponentPreview name="tabs-icons" />
+
+Put an icon before the label. Tab icons are sized to 16 px. A disabled tab stays focusable but can't be selected.
+
+## Vertical
+
+<ComponentPreview name="tabs-vertical" />
+
+Set `orientation="vertical"` on `Tabs` so Up and Down Arrow move between tabs. Lay out the list as a column with `className`; the indicator follows the selected tab.
+
+## API
+
+Tabs takes every UI SDK `Tabs` prop. These are the ones people use most.
+
+| Prop | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `value` | `string \| null` | none | The selected tab. Pass it to control the tabs. |
+| `defaultValue` | `string \| null` | first enabled tab | The tab selected at first. |
+| `onValueChange` | `(value, details) => void` | none | Runs when the selection changes. |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Which arrow keys move between tabs. |
+| `activation` | `"automatic" \| "manual"` | `"automatic"` | Select on focus, or wait for Enter or Space. |
+| `loop` | `boolean` | `true` | Whether arrow keys wrap around. |
+| `keepMounted` (on `TabsPanel`) | `boolean` | `false` | Keep a hidden panel in the page. |
+
+See the [UI SDK reference](https://ui-sdk.dev/docs/components/tabs) for the rest.
+
+## Keyboard
+
+| Key | Action |
+| --- | --- |
+| Tab | Moves focus into the list, then to the open panel. |
+| Left Arrow, Right Arrow | Moves between tabs when horizontal. |
+| Up Arrow, Down Arrow | Moves between tabs when vertical. |
+| Home, End | Moves to the first or last tab. |
+| Enter, Space | Selects the focused tab when `activation` is `"manual"`. |

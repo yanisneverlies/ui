@@ -1,0 +1,49 @@
+---
+title: Input
+description: A single-line text input with a visible 3:1 edge, plus a group for icons and a clear button.
+---
+
+<ComponentPreview name="input-demo" />
+
+## Installation
+
+<Install name="input" />
+
+## Usage
+
+```tsx title="Usage"
+import { Input } from "@/components/ui/input"
+
+export function EmailInput() {
+  return <Input type="email" aria-label="Newsletter email" />
+}
+```
+
+Give every input a visible label by putting it in a [Field](/docs/components/field). Without one, set `aria-label`.
+
+## Search with a clear button
+
+<ComponentPreview name="input-search" />
+
+`InputGroup` holds an input with an icon or buttons beside it. The input inside loses its own box, and the group shows the edge and the focus ring. `InputClear` shows only while the input has text, empties it and returns focus. Give it an `aria-label`.
+
+## Disabled and read-only
+
+<ComponentPreview name="input-states" />
+
+A disabled input leaves the tab order and the form. A read-only input stays focusable, selectable and submitted, and gets a tinted ground.
+
+## API
+
+Input takes every native `<input>` prop and every UI SDK `Input` prop. These are the ones people use most.
+
+| Prop | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `value` | `string` | none | The value, for a controlled input. |
+| `defaultValue` | `string` | none | The value it starts with. A form reset returns to it. |
+| `onValueChange` | `(value, details) => void` | none | Runs when typing, a clear press or a reset changes the value. |
+| `disabled` | `boolean` | `false` | Disables the input. |
+| `readOnly` | `boolean` | `false` | Keeps it focusable and submitted, but stops edits. |
+| `required` | `boolean` | `false` | Blocks form submission while empty. |
+
+See the [UI SDK reference](https://ui-sdk.dev/docs/components/input) for the rest.

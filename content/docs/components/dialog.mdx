@@ -1,0 +1,85 @@
+---
+title: Dialog
+description: A modal window for a decision or a short task. It traps focus, dims the page and returns focus when it closes.
+---
+
+<ComponentPreview name="dialog-demo" />
+
+## Installation
+
+<Install name="dialog" />
+
+## Usage
+
+```tsx title="Usage"
+import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+
+export function Example() {
+  return (
+    <Dialog>
+      <DialogTrigger render={<Button />}>Delete highlight</DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Delete this highlight?</DialogTitle>
+          <DialogDescription>The letter itself stays.</DialogDescription>
+        </DialogHeader>
+        <DialogFooter>
+          <DialogClose render={<Button variant="ghost" />}>Keep highlight</DialogClose>
+          <DialogClose render={<Button variant="destructive" />}>Delete highlight</DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  )
+}
+```
+
+`DialogContent` brings its own backdrop, so a dialog is a trigger plus content. Every dialog needs a `DialogTitle`. Add a `DialogDescription` when the title alone doesn't say what happens next.
+
+## Form
+
+Put a form inside the content. Focus moves to the first field when the dialog opens. Use `method="dialog"` so submitting closes it.
+
+<ComponentPreview name="dialog-form" />
+
+## Controlled
+
+Pass `open` and `onOpenChange` to drive the dialog from your own state. Set `showClose={false}` when the footer already has a way out.
+
+<ComponentPreview name="dialog-controlled" />
+
+## API
+
+<AutoTypeTable path="./src/components/ui/dialog.tsx" name="DialogContentOwnProps" />
+
+Common UI SDK options:
+
+| Prop | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `open` | `boolean` | | Whether the dialog is open. Pass it to control the dialog. |
+| `defaultOpen` | `boolean` | `false` | Whether the dialog starts open, when uncontrolled. |
+| `onOpenChange` | `(open, details) => void` | | Runs when the dialog wants to open or close. `details.reason` says why. |
+| `modal` | `boolean \| "trap-focus"` | `true` | `true` makes the page inert. `"trap-focus"` traps focus but leaves the page usable. |
+| `dismissible` | `boolean` | `true` | Whether Escape and an outside press can close it. Set `false` while a form has unsaved changes. |
+| `onDismissAttempt` | `(details) => void` | | Runs when a dismissal was refused. Ask "Discard changes?" here. |
+| `initialFocus` | `DialogInitialFocus` | first focusable | On `DialogContent`. Where focus goes when the dialog opens. |
+| `keepMounted` | `boolean` | `false` | On `DialogContent`. Keeps the content in the page, hidden, while closed. |
+
+See [UI SDK Dialog](https://ui-sdk.dev/docs/components/dialog) for the rest, including `DialogClose` actions, nested dialogs and sheets.
+
+## Keyboard
+
+| Key | Action |
+| --- | --- |
+| Enter, Space | On the trigger, opens the dialog. |
+| Tab, Shift+Tab | Moves through the dialog's controls. Focus stays inside while it's modal. |
+| Escape | Closes the topmost dialog and returns focus to its trigger. |

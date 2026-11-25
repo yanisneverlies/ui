@@ -1,0 +1,54 @@
+---
+title: Installation
+description: Add the registry to a shadcn project, then add components.
+---
+
+You need a React project with Tailwind CSS v4 and a `components.json`. If you don't have one yet, run `npx shadcn init` first.
+
+<Steps>
+<Step>
+
+### Add the registry
+
+Add `@yanisneverlies` to the `registries` field of `components.json`:
+
+```json title="components.json"
+{
+  "registries": {
+    "@yanisneverlies": "https://raw.githubusercontent.com/yanisneverlies/ui/main/public/r/{name}.json"
+  }
+}
+```
+
+</Step>
+<Step>
+
+### Add a component
+
+The CLI brings the theme, the `cn()` helper, and the sound helper along with it. The components depend on `@ui-sdk/react` and `@ui-sdk/core`, which the CLI installs for you.
+
+<Install name="button" />
+
+</Step>
+<Step>
+
+### Declare the UI SDK layer and import the tokens
+
+Put `@layer ui-sdk;` at the top of your global CSS, above `@import "tailwindcss"`. Then import the theme after Tailwind:
+
+```css title="app/globals.css"
+@layer ui-sdk;
+@import "tailwindcss";
+@import "../styles/ui.css";
+```
+
+UI SDK adds a little behavior CSS in the `ui-sdk` layer. Declaring the layer first puts it below your styles, so your styles win.
+
+If your project already uses shadcn's default theme, remove its `:root` and `.dark` color blocks. `ui.css` defines the same names.
+
+</Step>
+</Steps>
+
+## Fonts
+
+The theme loads Inter for text and Apfel Grotezk for display through Fontsource. Both install with the theme. To use your own fonts, change `--font-sans` and `--font-display` in `ui.css`.

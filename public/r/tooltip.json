@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tooltip",
+  "title": "Tooltip",
+  "description": "A short name or hint for a control, with an optional shortcut.",
+  "dependencies": [
+    "@ui-sdk/react",
+    "@ui-sdk/core"
+  ],
+  "registryDependencies": [
+    "@yanisneverlies/theme",
+    "@yanisneverlies/utils",
+    "@yanisneverlies/popup-classes"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/tooltip.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  Tooltip,\n  TooltipContent as TooltipContentPart,\n  TooltipShortcut as TooltipShortcutPart,\n  TooltipTrigger,\n} from \"@ui-sdk/react/tooltip\"\n\nimport { cn, cx } from \"@/lib/utils\"\nimport { popupMotion } from \"./popup-classes\"\n\n/** Plain text only: a tooltip can't take focus, so links or buttons inside it can't be reached. */\nfunction TooltipContent({ className, ...props }: React.ComponentProps<typeof TooltipContentPart>) {\n  return (\n    <TooltipContentPart\n      className={cx(\n        cn(\n          popupMotion,\n          \"data-instant:transition-none\",\n          \"m-0 flex max-w-64 items-center gap-2 rounded-sm border-0 bg-foreground px-2 py-1 text-small text-background shadow-float\"\n        ),\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction TooltipShortcut({ className, ...props }: React.ComponentProps<typeof TooltipShortcutPart>) {\n  return <TooltipShortcutPart className={cx(\"font-sans text-small text-faint-foreground tnum\", className)} {...props} />\n}\n\nexport { Tooltip, TooltipTrigger, TooltipContent, TooltipShortcut }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

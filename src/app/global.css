@@ -1,0 +1,99 @@
+@layer ui-sdk;
+@import "tailwindcss";
+@import "fumadocs-ui/css/shadcn.css";
+@import "fumadocs-ui/css/preset.css";
+@import "../styles/ui.css";
+
+/* Fumadocs reads shadcn names through shadcn.css; these fill the sidebar slots it adds. */
+:root,
+.dark {
+  --sidebar: var(--background);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-border: transparent;
+  --sidebar-accent: var(--secondary);
+  --sidebar-accent-foreground: var(--foreground);
+  --sidebar-ring: var(--ring);
+  --sidebar-primary-foreground: var(--primary-foreground);
+
+  /* Fumadocs uses its primary for text (active link, current heading): the text-safe brand orange. */
+  --color-fd-primary: var(--brand-strong);
+  --color-fd-primary-foreground: var(--primary-foreground);
+  /* The brief separates with tone and spacing, not hairlines: code blocks, tabs and cards sit on a tint. */
+  --color-fd-border: transparent;
+  --color-fd-card: var(--secondary);
+}
+
+/* Fumadocs' own sizes, mapped onto the four-size scale: small 13, body 15, title 20, display 40. */
+@theme {
+  --text-xs: var(--text-small);
+  --text-xs--line-height: var(--text-small--line-height);
+  --text-sm: var(--text-small);
+  --text-sm--line-height: var(--text-small--line-height);
+  --text-base: var(--text-body);
+  --text-base--line-height: var(--text-body--line-height);
+  --text-lg: var(--text-body);
+  --text-lg--line-height: var(--text-body--line-height);
+}
+
+#nd-page .prose {
+  font-size: var(--text-body);
+  line-height: 1.65;
+}
+#nd-page .prose :where(h2):not(:where(.not-prose *)) {
+  font-family: var(--font-display);
+  font-size: var(--text-title);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+#nd-page .prose :where(h3):not(:where(.not-prose *)) {
+  font-size: var(--text-body);
+  font-weight: 600;
+}
+#nd-page .prose :where(code):not(:where(pre *, .not-prose *)) {
+  font-size: var(--text-small);
+}
+/* The table of contents uses prose-sm (14px); bring it onto the scale. */
+#nd-toc :where(.prose-sm, a) {
+  font-size: var(--text-small);
+}
+
+/* Token names in tables stay whole; the table scrolls instead. */
+#nd-page .prose :where(td, th) code {
+  white-space: nowrap;
+}
+
+/* Orange marks the current position: the active sidebar item, the TOC, the selected tab. Not content. */
+#nd-page {
+  --color-fd-primary: var(--foreground);
+}
+#nd-page [role="tab"] {
+  --color-fd-primary: var(--brand-strong);
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
+html > body[data-scroll-locked] {
+  margin-right: 0px !important;
+  --removed-body-scroll-bar-size: 0px !important;
+}
+
+body {
+  font-size: var(--text-body);
+  line-height: var(--text-body--line-height);
+}
+
+/* Wide tables scroll inside their wrapper instead of squeezing to one word per line. */
+#nd-page .prose :where(div:has(> table)) {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+#nd-page .prose :where(table) {
+  min-width: 560px;
+}
+
+/* The table of contents keeps its moving current-position thumb, not the grey rail behind it. */
+#nd-toc a > svg .stroke-fd-foreground\/10 {
+  stroke: transparent;
+}

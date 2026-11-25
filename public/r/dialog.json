@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "dialog",
+  "title": "Dialog",
+  "description": "A modal over the page with title, description, close button and focus trap.",
+  "dependencies": [
+    "@ui-sdk/react",
+    "@ui-sdk/core",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "@yanisneverlies/theme",
+    "@yanisneverlies/utils",
+    "@yanisneverlies/popup-classes"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/dialog.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  Dialog,\n  DialogBackdrop as DialogBackdropPart,\n  DialogClose,\n  DialogContent as DialogContentPart,\n  DialogDescription as DialogDescriptionPart,\n  DialogTitle as DialogTitlePart,\n  DialogTrigger,\n} from \"@ui-sdk/react/dialog\"\nimport { X } from \"lucide-react\"\n\nimport { cn, cx } from \"@/lib/utils\"\nimport { popupSurface } from \"./popup-classes\"\n\nfunction DialogBackdrop({ className, ...props }: React.ComponentProps<typeof DialogBackdropPart>) {\n  return (\n    <DialogBackdropPart\n      className={cx(\n        \"fixed inset-0 bg-black/30 transition-opacity duration-200 ease-(--ease-out) data-ending-style:ease-(--ease-in) data-starting-style:opacity-0 data-ending-style:opacity-0 dark:bg-black/60\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\n/** DialogContent's own props. It also takes every UI SDK DialogContent prop. */\ninterface DialogContentOwnProps {\n  /**\n   * Show a close button in the top corner. Turn it off when the dialog has its own way out.\n   * @defaultValue true\n   */\n  showClose?: boolean\n  /** The close button's accessible name. @defaultValue \"Close\" */\n  closeLabel?: string\n}\n\ntype DialogContentProps = Omit<React.ComponentProps<typeof DialogContentPart>, \"children\"> &\n  DialogContentOwnProps & { children?: React.ReactNode }\n\n/** Centered on the page. Brings its backdrop along, so a dialog is Trigger plus Content. */\nfunction DialogContent({ className, showClose = true, closeLabel = \"Close\", children, ...props }: DialogContentProps) {\n  return (\n    <>\n      <DialogBackdrop />\n      <DialogContentPart\n        className={cx(\n          cn(\n            popupSurface,\n            \"fixed inset-0 m-auto h-fit max-h-[calc(100dvh-32px)] w-[min(480px,calc(100vw-32px))] overflow-y-auto overscroll-contain rounded-2xl p-6\",\n            \"transition-[opacity,scale] duration-200 ease-(--ease-out) data-ending-style:duration-150 data-ending-style:ease-(--ease-in) data-starting-style:opacity-0 data-ending-style:opacity-0 motion-safe:data-starting-style:scale-96 motion-safe:data-ending-style:scale-96\"\n          ),\n          className\n        )}\n        {...props}\n      >\n        {children}\n        {showClose ? (\n          <DialogClose\n            aria-label={closeLabel}\n            className=\"pressable absolute end-4 top-4 grid size-8 place-items-center rounded-sm text-muted-foreground hover:bg-secondary hover:text-foreground\"\n          >\n            <X className=\"size-4\" />\n          </DialogClose>\n        ) : null}\n      </DialogContentPart>\n    </>\n  )\n}\n\nfunction DialogHeader({ className, ...props }: React.ComponentProps<\"div\">) {\n  return <div data-slot=\"dialog-header\" className={cn(\"flex flex-col gap-2 pe-8\", className)} {...props} />\n}\n\nfunction DialogTitle({ className, ...props }: React.ComponentProps<typeof DialogTitlePart>) {\n  return <DialogTitlePart className={cx(\"font-display text-title font-normal tracking-[-0.01em]\", className)} {...props} />\n}\n\nfunction DialogDescription({ className, ...props }: React.ComponentProps<typeof DialogDescriptionPart>) {\n  return <DialogDescriptionPart className={cx(\"text-body text-muted-foreground\", className)} {...props} />\n}\n\n/** Actions at the end of the dialog. The main action goes last. */\nfunction DialogFooter({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"dialog-footer\"\n      className={cn(\"mt-6 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end\", className)}\n      {...props}\n    />\n  )\n}\n\nexport {\n  Dialog,\n  DialogTrigger,\n  DialogBackdrop,\n  DialogContent,\n  DialogHeader,\n  DialogTitle,\n  DialogDescription,\n  DialogFooter,\n  DialogClose,\n  type DialogContentProps,\n  type DialogContentOwnProps,\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

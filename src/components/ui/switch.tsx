@@ -1,57 +1,58 @@
 "use client"
 
 import * as React from "react"
-import { Switch as SwitchPrimitive } from "radix-ui"
-import { cva, type VariantProps } from "class-variance-authority"
+import { Switch as SwitchPart, SwitchThumb } from "@ui-sdk/react/switch"
+import { cva } from "class-variance-authority"
 
-import { cn } from "@/lib/utils"
+import { cx } from "@/lib/utils"
 import { useSound, type SoundProp } from "@/lib/sound"
 
 const switchVariants = cva(
   [
     "peer relative inline-flex shrink-0 items-center rounded-full p-[3px] transition-colors duration-200 ease-(--ease-out)",
-    "bg-press data-[state=checked]:bg-text disabled:cursor-default disabled:opacity-45",
-    // Hit area stays at least 24px tall even when the track is smaller.
-    "after:absolute after:-inset-y-1 after:-inset-x-1 after:content-['']",
+    "bg-input data-checked:bg-foreground data-disabled:cursor-default data-disabled:opacity-45",
+    // Hit area stays 24px tall (44px on coarse pointers) even when the track is smaller.
+    "after:absolute after:-inset-x-1 after:-inset-y-1 after:content-['']",
   ],
   {
     variants: {
       size: {
-        sm: "h-[18px] w-[30px] [--thumb:12px]",
-        md: "h-[22px] w-[38px] [--thumb:16px]",
+        sm: "h-[18px] w-[30px] [--thumb:12px] pointer-coarse:after:-inset-x-[7px] pointer-coarse:after:-inset-y-[13px]",
+        md: "h-[22px] w-[38px] [--thumb:16px] pointer-coarse:after:-inset-x-[3px] pointer-coarse:after:-inset-y-[11px]",
       },
     },
     defaultVariants: { size: "md" },
   }
 )
 
-type SwitchProps = React.ComponentProps<typeof SwitchPrimitive.Root> &
-  VariantProps<typeof switchVariants> & {
-    /** Cue played when it flips, if sound is on. Default "toggle"; `false` silences it. */
-    sound?: SoundProp
-  }
+/** Switch's own props. It also takes every UI SDK Switch prop: `checked`, `defaultChecked`, `onCheckedChange`, `disabled`, `name`, `required`. */
+interface SwitchOwnProps {
+  /** @defaultValue "md" */
+  size?: "sm" | "md"
+  /**
+   * Cue played when it flips, if sound is on. Pass `false` to silence it, for example on the switch
+   * that turns sound on.
+   * @defaultValue "toggle"
+   */
+  sound?: SoundProp
+}
+
+type SwitchProps = Omit<React.ComponentProps<typeof SwitchPart>, "children"> & SwitchOwnProps
 
 function Switch({ className, size, sound = "toggle", onCheckedChange, ...props }: SwitchProps) {
   const { play } = useSound()
   return (
-    <SwitchPrimitive.Root
-      data-slot="switch"
-      className={cn(switchVariants({ size }), className)}
-      onCheckedChange={(checked) => {
-        onCheckedChange?.(checked)
+    <SwitchPart
+      className={cx(switchVariants({ size }), className)}
+      onCheckedChange={(checked, details) => {
+        onCheckedChange?.(checked, details)
         play(sound, { direction: checked ? "forward" : "back" })
       }}
       {...props}
     >
-      <SwitchPrimitive.Thumb
-        data-slot="switch-thumb"
-        className={cn(
-          "pointer-events-none block size-(--thumb) rounded-full bg-bg shadow-sm",
-          "transition-transform duration-200 ease-(--ease-out) data-[state=checked]:translate-x-full motion-reduce:transition-none"
-        )}
-      />
-    </SwitchPrimitive.Root>
+      <SwitchThumb className="pointer-events-none block size-(--thumb) rounded-full bg-background shadow-sm transition-transform duration-200 ease-(--ease-out) data-checked:translate-x-full motion-reduce:transition-none" />
+    </SwitchPart>
   )
 }
 
-export { Switch, switchVariants }
+export { Switch, switchVariants, type SwitchProps, type SwitchOwnProps }

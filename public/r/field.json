@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "field",
+  "title": "Field",
+  "description": "Label, description and error for a control, plus field sets and groups.",
+  "dependencies": [
+    "@ui-sdk/react",
+    "@ui-sdk/core"
+  ],
+  "registryDependencies": [
+    "@yanisneverlies/theme",
+    "@yanisneverlies/utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/field.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  Field as FieldPart,\n  FieldDescription as FieldDescriptionPart,\n  FieldError as FieldErrorPart,\n  FieldGroup as FieldGroupPart,\n  FieldLabel as FieldLabelPart,\n  FieldLegend as FieldLegendPart,\n  FieldSet as FieldSetPart,\n} from \"@ui-sdk/react/field\"\n\nimport { cx } from \"@/lib/utils\"\n\n/** Label, control, description and error, wired together. The control is one of ours: Input, Textarea, Select, Checkbox, Switch. */\nfunction Field({ className, ...props }: React.ComponentProps<typeof FieldPart>) {\n  return (\n    <FieldPart\n      className={cx(\n        \"flex min-w-0 flex-col gap-2 has-[>[data-slot=checkbox]]:flex-row has-[>[data-slot=checkbox]]:flex-wrap has-[>[data-slot=checkbox]]:items-center has-[>[data-slot=switch]]:flex-row has-[>[data-slot=switch]]:flex-wrap has-[>[data-slot=switch]]:items-center\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction FieldLabel({ className, ...props }: React.ComponentProps<typeof FieldLabelPart>) {\n  return <FieldLabelPart className={cx(\"text-small font-medium text-foreground data-disabled:opacity-45\", className)} {...props} />\n}\n\nfunction FieldDescription({ className, ...props }: React.ComponentProps<typeof FieldDescriptionPart>) {\n  return <FieldDescriptionPart className={cx(\"basis-full text-small text-muted-foreground\", className)} {...props} />\n}\n\n/** Shows only while the field is invalid. Says what's wrong and how to fix it. */\nfunction FieldError({ className, ...props }: React.ComponentProps<typeof FieldErrorPart>) {\n  return <FieldErrorPart className={cx(\"basis-full text-small text-destructive\", className)} {...props} />\n}\n\nfunction FieldSet({ className, ...props }: React.ComponentProps<typeof FieldSetPart>) {\n  return <FieldSetPart className={cx(\"m-0 flex min-w-0 flex-col gap-4 border-0 p-0\", className)} {...props} />\n}\n\nfunction FieldLegend({ className, ...props }: React.ComponentProps<typeof FieldLegendPart>) {\n  return <FieldLegendPart className={cx(\"mb-1 p-0 text-body font-medium\", className)} {...props} />\n}\n\nfunction FieldGroup({ className, ...props }: React.ComponentProps<typeof FieldGroupPart>) {\n  return <FieldGroupPart className={cx(\"flex flex-col gap-4\", className)} {...props} />\n}\n\nexport { Field, FieldLabel, FieldDescription, FieldError, FieldSet, FieldLegend, FieldGroup }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

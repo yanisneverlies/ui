@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "textarea",
+  "title": "Textarea",
+  "description": "A multi-line text input that matches Input.",
+  "dependencies": [
+    "@ui-sdk/react",
+    "@ui-sdk/core"
+  ],
+  "registryDependencies": [
+    "@yanisneverlies/theme",
+    "@yanisneverlies/utils",
+    "@yanisneverlies/input"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/textarea.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Textarea as TextareaPart } from \"@ui-sdk/react/textarea\"\n\nimport { cx } from \"@/lib/utils\"\nimport { fieldBox } from \"./input\"\n\nfunction Textarea({ className, ...props }: React.ComponentProps<typeof TextareaPart>) {\n  return <TextareaPart className={cx(`${fieldBox} min-h-24 resize-y px-3 py-2 leading-6`, className)} {...props} />\n}\n\nexport { Textarea }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

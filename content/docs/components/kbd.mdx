@@ -1,0 +1,35 @@
+---
+title: Kbd
+description: Keyboard hints, either flat, as a keycap, or on a primary button.
+---
+
+<ComponentPreview name="kbd-demo" />
+
+## Installation
+
+<Install name="kbd" />
+
+## Playground
+
+<KbdPlayground />
+
+## Keys pressed together
+
+Wrap them in `KbdGroup`:
+
+```tsx title="Usage"
+<KbdGroup>
+  <Kbd>⌘</Kbd>
+  <Kbd>K</Kbd>
+</KbdGroup>
+```
+
+## Inside a button
+
+Use `variant="on-primary"` inside a primary button, and the default variant inside the others. See the first example on [Button](/docs/components/button).
+
+## API
+
+<AutoTypeTable path="./src/components/ui/kbd.tsx" name="KbdOwnProps" />
+
+Kbd also takes every native `<kbd>` prop.

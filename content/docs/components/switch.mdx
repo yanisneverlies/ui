@@ -1,0 +1,28 @@
+---
+title: Switch
+description: An accessible switch in two sizes, with a toggle cue when sound is on.
+---
+
+<ComponentPreview name="switch-demo" />
+
+## Installation
+
+<Install name="switch" />
+
+## Playground
+
+<SwitchPlayground />
+
+## Labels
+
+Wrap the switch and its text in a `<label>`, so a click on the text flips it too. Give a switch with no visible text an `aria-label`.
+
+## Sound
+
+A switch plays `toggle` when sound is on, going up when it turns on and down when it turns off. Pass `sound={false}` on the switch that controls sound itself, so it doesn't cue its own state change.
+
+## API
+
+<AutoTypeTable path="./src/components/ui/switch.tsx" name="SwitchOwnProps" />
+
+Switch also takes every UI SDK `Switch` prop: `checked`, `defaultChecked`, `onCheckedChange`, `disabled`, `name`, and `required`.

@@ -1,6 +1,6 @@
 import * as React from "react"
-import { Slot } from "radix-ui"
-import { cva, type VariantProps } from "class-variance-authority"
+import { renderElement, type RenderProp } from "@ui-sdk/react/primitive"
+import { cva } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
@@ -10,13 +10,13 @@ const badgeVariants = cva(
   {
     variants: {
       tone: {
-        neutral: "bg-well text-text-2",
-        primary: "bg-primary-soft text-text",
+        neutral: "bg-secondary text-soft-foreground",
+        brand: "bg-brand-soft text-foreground",
         success: "bg-success-soft text-success",
         warning: "bg-warning-soft text-warning",
         info: "bg-info-soft text-info",
-        danger: "bg-danger-soft text-danger",
-        muted: "bg-well text-muted",
+        destructive: "bg-destructive-soft text-destructive",
+        muted: "bg-secondary text-muted-foreground",
       },
       shape: {
         /** Matches the label chip in a card header. */
@@ -24,7 +24,7 @@ const badgeVariants = cva(
         pill: "rounded-full",
       },
       size: {
-        sm: "h-5 px-1.5 text-micro",
+        sm: "h-5 px-2",
         md: "",
       },
     },
@@ -32,16 +32,32 @@ const badgeVariants = cva(
   }
 )
 
-function Badge({
-  className,
-  tone,
-  shape,
-  size,
-  asChild = false,
-  ...props
-}: React.ComponentProps<"span"> & VariantProps<typeof badgeVariants> & { asChild?: boolean }) {
-  const Comp = asChild ? Slot.Root : "span"
-  return <Comp data-slot="badge" data-tone={tone ?? "neutral"} className={cn(badgeVariants({ tone, shape, size }), className)} {...props} />
+/** Badge's own props. It also takes every native `<span>` prop. */
+interface BadgeOwnProps {
+  /**
+   * The color family. `destructive` is reserved for errors and failures.
+   * @defaultValue "neutral"
+   */
+  tone?: "neutral" | "brand" | "success" | "warning" | "info" | "destructive" | "muted"
+  /**
+   * `rect` matches label chips in card headers; `pill` reads as a status.
+   * @defaultValue "rect"
+   */
+  shape?: "rect" | "pill"
+  /** @defaultValue "md" */
+  size?: "sm" | "md"
+  /** Renders your own element (a link, say) with the badge's styles. */
+  render?: RenderProp
 }
 
-export { Badge, badgeVariants }
+type BadgeProps = React.ComponentProps<"span"> & BadgeOwnProps
+
+function Badge({ className, tone, shape, size, render, ...props }: BadgeProps) {
+  return renderElement(
+    "span",
+    { "data-slot": "badge", "data-tone": tone ?? "neutral", className: cn(badgeVariants({ tone, shape, size }), className), ...props },
+    render
+  )
+}
+
+export { Badge, badgeVariants, type BadgeProps, type BadgeOwnProps }

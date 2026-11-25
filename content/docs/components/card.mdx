@@ -1,0 +1,53 @@
+---
+title: Card
+description: A frame and a raised panel that share one curve, or a single surface.
+---
+
+<ComponentPreview name="card-shell" />
+
+## Installation
+
+<Install name="card" />
+
+## Playground
+
+<CardPlayground />
+
+## Anatomy
+
+```tsx title="Anatomy"
+<Card>
+  <CardPanel>
+    <CardHeader>
+      <CardTitle />
+      <CardDescription />
+      <CardAction />
+    </CardHeader>
+    <CardContent />
+  </CardPanel>
+  <CardFooter />
+</Card>
+```
+
+In the default `shell` variant, `CardPanel` is the raised surface inside a tinted frame, and `CardFooter` sits on the frame below it.
+
+## Concentric corners
+
+The panel takes the theme's `--radius`. The frame adds its inset on top, so the curves stay concentric. A button that ends the footer gets the panel's radius too, so its corner follows the frame.
+
+| Variable | Default | Set on |
+| --- | --- | --- |
+| `--card-inset` | `8px` | `Card` |
+| `--card-radius` | `--radius` + `--card-inset` | `Card`. Override it only to break the link on purpose. |
+
+## Surface
+
+For a single raised card with no frame, use `variant="surface"` and put the parts straight inside it.
+
+<ComponentPreview name="card-surface" />
+
+## API
+
+<AutoTypeTable path="./src/components/ui/card.tsx" name="CardOwnProps" />
+
+`CardPanel`, `CardHeader`, `CardTitle`, `CardDescription`, `CardAction`, `CardContent`, and `CardFooter` take the native `<div>` props and nothing else.

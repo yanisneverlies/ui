@@ -1,0 +1,29 @@
+{
+  "title": "Components",
+  "defaultOpen": true,
+  "pages": [
+    "---Actions---",
+    "button",
+    "menu",
+    "---Overlays---",
+    "dialog",
+    "popover",
+    "tooltip",
+    "toast",
+    "---Forms---",
+    "field",
+    "input",
+    "textarea",
+    "select",
+    "checkbox",
+    "switch",
+    "segmented-control",
+    "---Layout---",
+    "card",
+    "tabs",
+    "accordion",
+    "---Display---",
+    "badge",
+    "kbd"
+  ]
+}

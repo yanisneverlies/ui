@@ -1,0 +1,49 @@
+---
+title: Textarea
+description: A multi-line text input with the same visible edge as Input.
+---
+
+<ComponentPreview name="textarea-demo" />
+
+## Installation
+
+<Install name="textarea" />
+
+## Usage
+
+```tsx title="Usage"
+import { Textarea } from "@/components/ui/textarea"
+
+export function NoteInput() {
+  return <Textarea aria-label="Margin note" rows={4} />
+}
+```
+
+Put it in a [Field](/docs/components/field) for a visible label and description. Without one, set `aria-label`.
+
+## Character count
+
+<ComponentPreview name="textarea-count" />
+
+Keep the text in state and show its length in the description. Set `maxLength` to enforce the limit. `autoResize` grows the box with the text, and scrolls past the CSS `max-height`.
+
+## Invalid
+
+<ComponentPreview name="textarea-invalid" />
+
+Set `invalid` on the field for an error your app decides. The textarea gets `aria-invalid` and a destructive edge.
+
+## API
+
+Textarea takes every native `<textarea>` prop and every UI SDK `Textarea` prop. These are the ones people use most.
+
+| Prop | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `value` | `string` | none | The value, for a controlled textarea. |
+| `defaultValue` | `string` | none | The value it starts with. |
+| `onValueChange` | `(value, details) => void` | none | Runs when typing or a reset changes the value. |
+| `autoResize` | `boolean` | `false` | Grows and shrinks with the text. |
+| `submitShortcut` | `"enter" \| "mod+enter"` | none | Which keys submit. Without it, Enter adds a line. |
+| `onSubmit` | `(value, details) => void` | none | Runs on the submit shortcut. |
+
+See the [UI SDK reference](https://ui-sdk.dev/docs/components/textarea) for the rest.

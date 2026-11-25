@@ -1,0 +1,60 @@
+---
+title: Field
+description: Wires a label, a control, a description and an error together.
+---
+
+<ComponentPreview name="field-demo" />
+
+## Installation
+
+<Install name="field" />
+
+## Usage
+
+```tsx title="Usage"
+import { Field, FieldDescription, FieldError, FieldLabel } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
+
+export function EmailField() {
+  return (
+    <Field name="email">
+      <FieldLabel>Newsletter email</FieldLabel>
+      <Input type="email" required />
+      <FieldDescription>We send one letter a week.</FieldDescription>
+      <FieldError match="valueMissing">Enter your email address.</FieldError>
+    </Field>
+  )
+}
+```
+
+The label names the control. The description and any error that shows describe it. Use `Input`, `Textarea`, `Select`, `Checkbox` or `Switch` as the control.
+
+## Errors
+
+<ComponentPreview name="field-error" />
+
+Use native constraints such as `required` and `type="email"`. The field shows its error after a submit attempt and updates it as the value changes. Use `match` to give each problem its own message.
+
+## Errors from your code
+
+<ComponentPreview name="field-invalid" />
+
+Set `invalid` on the field when your code or server decides. `FieldError` with `match` set to `true` then shows right away. Leave `invalid` out to use the browser's own validation.
+
+## Field sets
+
+<ComponentPreview name="field-set" />
+
+`FieldSet` and `FieldLegend` group related fields, and `FieldGroup` spaces them. A checkbox or switch sits beside its label automatically.
+
+## API
+
+Field takes every UI SDK `Field` prop. These are the ones people use most.
+
+| Prop | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `name` | `string` | none | The name the control submits under, if it has none. |
+| `invalid` | `boolean` | none | Forces the invalid state. `true` shows errors now, `false` hides them. |
+| `disabled` | `boolean` | `false` | Disables the control and marks every part. |
+
+`FieldError` takes `match`: `true` always shows it, or a validity key such as `"valueMissing"` shows it for that problem only. See the [UI SDK reference](https://ui-sdk.dev/docs/components/field) for the rest.
