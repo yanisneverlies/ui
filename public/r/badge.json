@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "badge",
+  "title": "Badge",
+  "description": "A quiet label on a tinted ground. Tones, rect or pill, two sizes, asChild.",
+  "dependencies": [
+    "radix-ui",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "@yanisneverlies/theme",
+    "@yanisneverlies/utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/badge.tsx",
+      "content": "import * as React from \"react\"\nimport { Slot } from \"radix-ui\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/** A quiet label on a tinted ground. The words carry the meaning; the tone repeats it. */\nconst badgeVariants = cva(\n  \"inline-flex h-6 max-w-full shrink-0 items-center gap-1 px-2 text-small font-medium whitespace-nowrap [&>span]:truncate [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-3\",\n  {\n    variants: {\n      tone: {\n        neutral: \"bg-well text-text-2\",\n        primary: \"bg-primary-soft text-text\",\n        success: \"bg-success-soft text-success\",\n        warning: \"bg-warning-soft text-warning\",\n        info: \"bg-info-soft text-info\",\n        danger: \"bg-danger-soft text-danger\",\n        muted: \"bg-well text-muted\",\n      },\n      shape: {\n        /** Matches the label chip in a card header. */\n        rect: \"rounded-xs\",\n        pill: \"rounded-full\",\n      },\n      size: {\n        sm: \"h-5 px-1.5 text-micro\",\n        md: \"\",\n      },\n    },\n    defaultVariants: { tone: \"neutral\", shape: \"rect\", size: \"md\" },\n  }\n)\n\nfunction Badge({\n  className,\n  tone,\n  shape,\n  size,\n  asChild = false,\n  ...props\n}: React.ComponentProps<\"span\"> & VariantProps<typeof badgeVariants> & { asChild?: boolean }) {\n  const Comp = asChild ? Slot.Root : \"span\"\n  return <Comp data-slot=\"badge\" data-tone={tone ?? \"neutral\"} className={cn(badgeVariants({ tone, shape, size }), className)} {...props} />\n}\n\nexport { Badge, badgeVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

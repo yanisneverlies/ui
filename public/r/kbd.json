@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "kbd",
+  "title": "Kbd",
+  "description": "Keyboard hints: flat, keycap, or on a primary button.",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "@yanisneverlies/theme",
+    "@yanisneverlies/utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/kbd.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst kbdVariants = cva(\n  \"inline-flex h-5 min-w-5 shrink-0 items-center justify-center gap-1 rounded-[5px] px-1 font-sans text-micro font-medium leading-none tnum select-none [&_svg:not([class*='size-'])]:size-3\",\n  {\n    variants: {\n      variant: {\n        /** Flat, for hints inside buttons and menus. */\n        default: \"bg-hover text-muted\",\n        /** A physical key with a base, for shortcut legends. From the Seneca reader. */\n        keycap: \"h-[22px] min-w-[22px] border border-b-2 border-hairline bg-raised px-1.5 text-text\",\n        /** On a primary button. */\n        \"on-primary\": \"bg-black/12 text-primary-ink\",\n      },\n    },\n    defaultVariants: { variant: \"default\" },\n  }\n)\n\nfunction Kbd({ className, variant, ...props }: React.ComponentProps<\"kbd\"> & VariantProps<typeof kbdVariants>) {\n  return <kbd data-slot=\"kbd\" className={cn(kbdVariants({ variant }), className)} {...props} />\n}\n\n/** Keys pressed together: <KbdGroup><Kbd>⌘</Kbd><Kbd>K</Kbd></KbdGroup> */\nfunction KbdGroup({ className, ...props }: React.ComponentProps<\"span\">) {\n  return <span data-slot=\"kbd-group\" className={cn(\"inline-flex items-center gap-1\", className)} {...props} />\n}\n\nexport { Kbd, KbdGroup, kbdVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

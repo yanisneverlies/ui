@@ -1,0 +1,168 @@
+/*
+ * ui — design tokens.
+ *
+ * Light is the default. Dark applies with `.dark` or `[data-theme="dark"]` on any ancestor,
+ * usually <html>. Every pair used for text passes WCAG AA in both themes.
+ *
+ * Change a value here and every component follows. Rename nothing: components read these names.
+ */
+@import "@fontsource-variable/inter/wght.css";
+@import "@fontsource/apfel-grotezk/400.css";
+@import "@fontsource/apfel-grotezk/700.css";
+
+@custom-variant dark (&:where(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Apfel Grotezk", "Inter Variable", ui-sans-serif, sans-serif;
+
+  /* Neutral ramp, warm, from background to text. */
+  --color-bg: #fbfaf9;
+  --color-raised: #ffffff;
+  --color-well: #f4f2ee;
+  --color-hover: #eeebe6;
+  --color-press: #e6e2dc;
+  --color-hairline: #e3dfd8;
+  --color-faint: #a5a29c;
+  --color-muted: #6e6e6d;
+  --color-text-2: #3b3a37;
+  --color-text: #121212;
+
+  /* Primary is for the one main action and the current position. Not decoration. */
+  --color-primary: #ff3e00;
+  --color-primary-hover: #e93800;
+  --color-primary-ink: #121212;
+  --color-primary-soft: #fff0ea;
+
+  /* Semantic tones: quiet, low chroma, well away from the primary hue. */
+  --color-success: oklch(0.5 0.09 155);
+  --color-success-soft: oklch(0.95 0.03 155);
+  --color-warning: oklch(0.56 0.1 78);
+  --color-warning-soft: oklch(0.95 0.04 85);
+  --color-info: oklch(0.5 0.09 255);
+  --color-info-soft: oklch(0.95 0.025 255);
+  /* Reserved for errors and failures. Nothing else may use this hue. */
+  --color-danger: oklch(0.52 0.15 20);
+  --color-danger-soft: oklch(0.95 0.03 20);
+
+  /*
+   * Radius. Nested surfaces stay concentric: inner = outer - inset.
+   * lg (20) with an 8px inset gives md (12) inside, so a card and the button in its footer share one curve.
+   */
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in: cubic-bezier(0.55, 0, 1, 0.45);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  --shadow-raised: 0 0 0 1px rgb(18 18 18 / 0.05), 0 1px 2px rgb(18 18 18 / 0.04), 0 4px 12px -2px rgb(18 18 18 / 0.05);
+  --shadow-float: 0 0 0 1px rgb(18 18 18 / 0.06), 0 8px 24px -6px rgb(18 18 18 / 0.14), 0 2px 6px rgb(18 18 18 / 0.05);
+  --shadow-shell: 0 0 0 1px rgb(18 18 18 / 0.04);
+
+  /* Type scale. At most four of these on one screen. */
+  --text-micro: 0.75rem;
+  --text-micro--line-height: 1.4;
+  --text-small: 0.8125rem;
+  --text-small--line-height: 1.45;
+  --text-body: 0.9375rem;
+  --text-body--line-height: 1.55;
+  --text-lead: 1.0625rem;
+  --text-lead--line-height: 1.5;
+  --text-title: 1.25rem;
+  --text-title--line-height: 1.2;
+  --text-display: 2rem;
+  --text-display--line-height: 1.08;
+}
+
+:where(.dark, [data-theme="dark"]) {
+  color-scheme: dark;
+  --color-bg: #0e0e0d;
+  --color-raised: #181816;
+  --color-well: #131311;
+  --color-hover: #1f1f1c;
+  --color-press: #272724;
+  --color-hairline: #2a2a27;
+  --color-faint: #64625e;
+  --color-muted: #8d8c8a;
+  --color-text-2: #c9c7c3;
+  --color-text: #f2f1ef;
+
+  --color-primary: #ff5a1f;
+  --color-primary-hover: #ff6d38;
+  --color-primary-ink: #121212;
+  --color-primary-soft: #2a170f;
+
+  --color-success: oklch(0.74 0.1 155);
+  --color-success-soft: oklch(0.25 0.035 155);
+  --color-warning: oklch(0.8 0.1 82);
+  --color-warning-soft: oklch(0.26 0.035 82);
+  --color-info: oklch(0.74 0.08 255);
+  --color-info-soft: oklch(0.25 0.03 255);
+  --color-danger: oklch(0.72 0.13 22);
+  --color-danger-soft: oklch(0.26 0.04 22);
+
+  --shadow-raised: 0 0 0 1px rgb(255 255 255 / 0.05), 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-float: 0 0 0 1px rgb(255 255 255 / 0.07), 0 12px 32px -8px rgb(0 0 0 / 0.6);
+  --shadow-shell: 0 0 0 1px rgb(255 255 255 / 0.04);
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv11", "ss03";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--color-primary) 22%, transparent);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-text);
+    outline-offset: 2px;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+}
+
+/* Numbers that change or line up. */
+@utility tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Press feedback for anything pressable. Disabled never scales; reduced motion never scales. */
+@utility pressable {
+  transition-property: scale, background-color, color, box-shadow, opacity;
+  transition-duration: 150ms;
+  transition-timing-function: var(--ease-out);
+  &:not(:disabled):active {
+    scale: 0.97;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    &:not(:disabled):active {
+      scale: 1;
+    }
+  }
+}

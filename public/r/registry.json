@@ -1,0 +1,76 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "yanisneverlies-ui",
+  "homepage": "https://github.com/yanisneverlies/ui",
+  "items": [
+    {
+      "name": "theme",
+      "type": "registry:file",
+      "title": "Theme",
+      "description": "Design tokens: warm neutrals, one primary, semantic tones, concentric radii, Inter and Apfel Grotezk. Import it after tailwindcss in your global CSS.",
+      "dependencies": ["@fontsource-variable/inter", "@fontsource/apfel-grotezk"],
+      "files": [{ "path": "src/styles/ui.css", "type": "registry:file", "target": "~/styles/ui.css" }]
+    },
+    {
+      "name": "utils",
+      "type": "registry:lib",
+      "title": "Utils",
+      "description": "cn(): clsx plus tailwind-merge that knows the custom type scale.",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "files": [{ "path": "src/lib/utils.ts", "type": "registry:lib" }]
+    },
+    {
+      "name": "sound",
+      "type": "registry:lib",
+      "title": "Sound",
+      "description": "Opt-in interaction sounds through cuelume. Off unless the app turns them on.",
+      "dependencies": ["cuelume"],
+      "files": [{ "path": "src/lib/sound.tsx", "type": "registry:lib" }]
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Primary, secondary, tonal, ghost, danger and link; three sizes plus icon sizes; asChild; optional sound.",
+      "dependencies": ["radix-ui", "class-variance-authority"],
+      "registryDependencies": ["@yanisneverlies/theme", "@yanisneverlies/utils", "@yanisneverlies/sound"],
+      "files": [{ "path": "src/components/ui/button.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "A quiet label on a tinted ground. Tones, rect or pill, two sizes, asChild.",
+      "dependencies": ["radix-ui", "class-variance-authority"],
+      "registryDependencies": ["@yanisneverlies/theme", "@yanisneverlies/utils"],
+      "files": [{ "path": "src/components/ui/badge.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "Shell card with a raised panel and concentric radii, or a single surface card.",
+      "dependencies": ["class-variance-authority"],
+      "registryDependencies": ["@yanisneverlies/theme", "@yanisneverlies/utils"],
+      "files": [{ "path": "src/components/ui/card.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "kbd",
+      "type": "registry:ui",
+      "title": "Kbd",
+      "description": "Keyboard hints: flat, keycap, or on a primary button.",
+      "dependencies": ["class-variance-authority"],
+      "registryDependencies": ["@yanisneverlies/theme", "@yanisneverlies/utils"],
+      "files": [{ "path": "src/components/ui/kbd.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "Accessible switch on Radix, two sizes, plays the toggle cue when sound is on.",
+      "dependencies": ["radix-ui", "class-variance-authority"],
+      "registryDependencies": ["@yanisneverlies/theme", "@yanisneverlies/utils", "@yanisneverlies/sound"],
+      "files": [{ "path": "src/components/ui/switch.tsx", "type": "registry:ui" }]
+    }
+  ]
+}

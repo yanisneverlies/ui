@@ -1,33 +1,89 @@
 # ui
 
-A small, open-source design foundation for React projects: shared design tokens and accessible components that each project can theme its own way.
+Accessible, themeable React components that you copy into your project and own, the way shadcn/ui works. Each one ships with sensible defaults, and you can change anything: variants, sizes, radius, tokens, sound.
 
-> **Status: early.** Nothing to install yet. The API will change.
+> **Status: early.** Five components so far. Names and APIs may still change.
 
-## Idea
+## Install
 
-Projects share a **foundation**, not a **look**.
+The components are distributed as a [shadcn registry](https://ui.shadcn.com/docs/registry). You need a React project with Tailwind CSS v4 and a `components.json` (`npx shadcn init`).
 
-- **Tokens** define the contract: semantic names for color roles (`--surface`, `--ink`, `--accent`), spacing, type, radius, and motion.
-- **Themes** fill in the values per project, so two apps can use the same components and still look nothing alike.
-- **Components** are added only after they've proven themselves in real projects, built on accessible primitives.
+1. Add the registry to `components.json`:
 
-## Stack
+   ```json
+   {
+     "registries": {
+       "@yanisneverlies": "https://raw.githubusercontent.com/yanisneverlies/ui/main/public/r/{name}.json"
+     }
+   }
+   ```
 
-- React + TypeScript
-- CSS custom properties for tokens (works with Tailwind v4 `@theme` or plain CSS)
+2. Add components. The theme, `cn()` and the sound helper come along automatically:
 
-## Roadmap
+   ```sh
+   npx shadcn add @yanisneverlies/button @yanisneverlies/card
+   ```
 
-- [ ] Token contract + default theme
-- [ ] First real consumer
-- [ ] Second consumer, to validate the contract
-- [ ] Core components (Button, Input, Dialog, …)
-- [ ] Docs
+3. Import the tokens after Tailwind in your global CSS:
 
-## Contributing
+   ```css
+   @import "tailwindcss";
+   @import "../styles/ui.css";
+   ```
 
-Issues and ideas are welcome. The project is too early for large PRs, so please open an issue first.
+## Components
+
+| Component | What it does |
+|---|---|
+| `button` | Primary, secondary, tonal, ghost, danger and link variants, three sizes plus icon sizes, `asChild`, optional sound. |
+| `card` | A shell frame with a raised panel and concentric corners, or a single surface. |
+| `badge` | A quiet label on a tinted ground: six tones, rect or pill, two sizes. |
+| `kbd` | Keyboard hints, either flat, as a keycap, or on a primary button. |
+| `switch` | Built on Radix, two sizes, plays the toggle cue when sound is on. |
+
+## Theming
+
+All colors, radii, type sizes, shadows and easings live in `styles/ui.css` as Tailwind v4 `@theme` tokens. Change a value there and every component follows.
+
+- **Dark mode** applies under `.dark` or `[data-theme="dark"]`.
+- **Fonts** are Inter for text and Apfel Grotezk for display, loaded through Fontsource.
+- **Concentric corners.** A shell card sets `--card-radius` (default 20px) and `--card-inset` (default 8px). The inner panel and a trailing footer button use `radius − inset`, so the curves line up at any size:
+
+  ```tsx
+  <Card className="[--card-radius:28px] [--card-inset:12px]">…</Card>
+  ```
+
+- **Per-instance changes** go through `className`, and tailwind-merge resolves conflicts: `<Button className="rounded-full">`.
+
+## Sound
+
+Sound is off until you opt in. Wrap the app in `SoundProvider` and give users a visible mute:
+
+```tsx
+import { SoundProvider, useSound } from "@/lib/sound"
+
+<SoundProvider>{app}</SoundProvider>
+
+const { enabled, setEnabled } = useSound()
+<Switch checked={enabled} onCheckedChange={setEnabled} sound={false} />
+```
+
+Components take a `sound` prop: a [cuelume](https://github.com/Danilaa1/cuelume) cue name, a cue with options, or `false`.
+
+```tsx
+<Button sound={{ name: "success", emphasis: "subtle" }}>Copy quote</Button>
+```
+
+Buttons are silent by default. A switch plays `toggle`. Use sounds to confirm something the user just did, and never play them on hover or on page load.
+
+## Develop
+
+```sh
+npm install
+npm run dev             # preview app with every component, light and dark
+npm run typecheck
+npm run registry:build  # writes public/r/*.json; commit the output
+```
 
 ## License
 

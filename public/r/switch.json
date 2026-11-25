@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "switch",
+  "title": "Switch",
+  "description": "Accessible switch on Radix, two sizes, plays the toggle cue when sound is on.",
+  "dependencies": [
+    "radix-ui",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "@yanisneverlies/theme",
+    "@yanisneverlies/utils",
+    "@yanisneverlies/sound"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/switch.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Switch as SwitchPrimitive } from \"radix-ui\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\nimport { useSound, type SoundProp } from \"@/lib/sound\"\n\nconst switchVariants = cva(\n  [\n    \"peer relative inline-flex shrink-0 items-center rounded-full p-[3px] transition-colors duration-200 ease-(--ease-out)\",\n    \"bg-press data-[state=checked]:bg-text disabled:cursor-default disabled:opacity-45\",\n    // Hit area stays at least 24px tall even when the track is smaller.\n    \"after:absolute after:-inset-y-1 after:-inset-x-1 after:content-['']\",\n  ],\n  {\n    variants: {\n      size: {\n        sm: \"h-[18px] w-[30px] [--thumb:12px]\",\n        md: \"h-[22px] w-[38px] [--thumb:16px]\",\n      },\n    },\n    defaultVariants: { size: \"md\" },\n  }\n)\n\ntype SwitchProps = React.ComponentProps<typeof SwitchPrimitive.Root> &\n  VariantProps<typeof switchVariants> & {\n    /** Cue played when it flips, if sound is on. Default \"toggle\"; `false` silences it. */\n    sound?: SoundProp\n  }\n\nfunction Switch({ className, size, sound = \"toggle\", onCheckedChange, ...props }: SwitchProps) {\n  const { play } = useSound()\n  return (\n    <SwitchPrimitive.Root\n      data-slot=\"switch\"\n      className={cn(switchVariants({ size }), className)}\n      onCheckedChange={(checked) => {\n        onCheckedChange?.(checked)\n        play(sound, { direction: checked ? \"forward\" : \"back\" })\n      }}\n      {...props}\n    >\n      <SwitchPrimitive.Thumb\n        data-slot=\"switch-thumb\"\n        className={cn(\n          \"pointer-events-none block size-(--thumb) rounded-full bg-bg shadow-sm\",\n          \"transition-transform duration-200 ease-(--ease-out) data-[state=checked]:translate-x-full motion-reduce:transition-none\"\n        )}\n      />\n    </SwitchPrimitive.Root>\n  )\n}\n\nexport { Switch, switchVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
