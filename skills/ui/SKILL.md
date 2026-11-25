@@ -9,7 +9,7 @@ description: Builds interfaces with the yanisneverlies/ui React component librar
 
 ## Read first
 
-- The docs site publishes Markdown for agents: `/llms.txt` is the index, `/llms-full.txt` is every page, and any docs page works as `/docs/<page>.md`.
+- The docs site publishes Markdown for agents: `https://ui.yanisneverlies.com/llms.txt` is the index, `/llms-full.txt` is every page, and any docs page works as `/docs/<page>.md`.
 - Read a component's page before you use it. It shows the parts, how they nest and the props.
 - For behavior the component doesn't document, read the UI SDK docs in `node_modules/@ui-sdk/react/docs/llms.txt`.
 - Don't read compiled JavaScript in `node_modules`.

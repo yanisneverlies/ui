@@ -1,0 +1,88 @@
+---
+title: Combobox
+description: Pick one or several values by typing. It looks like Select, but you search the list as you type.
+---
+
+<ComponentPreview name="combobox-demo" />
+
+## Installation
+
+<Install name="combobox" />
+
+## Usage
+
+```tsx title="Usage"
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxControl,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+  ComboboxTrigger,
+} from "@/components/ui/combobox"
+import { Field, FieldLabel } from "@/components/ui/field"
+
+export function TranslationPicker() {
+  return (
+    <Field>
+      <FieldLabel>Translation</FieldLabel>
+      <Combobox>
+        <ComboboxControl>
+          <ComboboxInput placeholder="Search translations" />
+          <ComboboxTrigger aria-label="Show translations" />
+        </ComboboxControl>
+        <ComboboxContent>
+          <ComboboxEmpty>No translation found.</ComboboxEmpty>
+          <ComboboxList>
+            <ComboboxItem value="gummere" label="Gummere (1917)">
+              Gummere (1917)
+            </ComboboxItem>
+            <ComboboxItem value="campbell" label="Campbell (1969)">
+              Campbell (1969)
+            </ComboboxItem>
+          </ComboboxList>
+        </ComboboxContent>
+      </Combobox>
+    </Field>
+  )
+}
+```
+
+`ComboboxControl` is the box: it draws the 3:1 edge and the focus outline, and the list opens at its width. Set `label` on every item, so filtering and the input use the right text. The typed text is only a query: closing the list without choosing restores the selected label.
+
+## Multiple
+
+<ComponentPreview name="combobox-multiple" />
+
+Add `multiple` and the value becomes a list. Choosing an item toggles it and keeps the list open. Render each value as a `ComboboxChip` with a `ComboboxChipRemove` inside `ComboboxChips`, and put the input in the same group.
+
+## API
+
+Our combobox adds no props of its own. It takes every UI SDK prop:
+
+| Prop | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `value` | `T \| T[] \| null` | | The selected value, or values with `multiple`. Controls the combobox. |
+| `defaultValue` | `T \| T[] \| null` | | The value selected at first, when uncontrolled. |
+| `onValueChange` | `(value, details) => void` | | Runs when the value wants to change. |
+| `multiple` | `boolean` | `false` | Whether several items can be selected. |
+| `itemToLabel` | `(value) => string` | | The text a value shows when its item isn't rendered yet. |
+| `filter` | `"contains" \| "startsWith" \| function \| false` | `"contains"` | How typing narrows the list. |
+| `autoHighlight` | `boolean \| "always" \| "selected"` | `false` | Highlights the first match while typing, so Enter chooses it. |
+| `name` | `string` | | The name the value submits under in a form. |
+| `disabled`, `readOnly`, `required` | `boolean` | `false` | Native form behavior. |
+
+See [UI SDK Combobox](https://ui-sdk.dev/docs/components/combobox) for the rest, including groups, async options and creating options.
+
+## Keyboard
+
+| Key | Action |
+| --- | --- |
+| Type | Filters the list and opens it. |
+| ArrowDown, ArrowUp | Opens the list, then moves the highlight. |
+| Enter | Chooses the highlighted item. |
+| Escape | Closes the list and restores the selected label. |
+| Backspace | With `multiple` and an empty input, removes the last chip. |
+| ArrowLeft, ArrowRight | With `multiple`, moves between chips. |

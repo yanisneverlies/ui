@@ -13,7 +13,7 @@ The components are distributed as a [shadcn registry](https://ui.shadcn.com/docs
    ```json
    {
      "registries": {
-       "@yanisneverlies": "https://raw.githubusercontent.com/yanisneverlies/ui/main/public/r/{name}.json"
+       "@yanisneverlies": "https://ui.yanisneverlies.com/r/{name}.json"
      }
    }
    ```
@@ -101,7 +101,7 @@ An agent skill teaches a coding agent how to build with these components. Instal
 npx skills add yanisneverlies/ui
 ```
 
-The docs site also publishes Markdown for agents: `/llms.txt` is the index, `/llms-full.txt` is every page, and any docs page works as `/docs/<page>.md`.
+The docs site also publishes Markdown for agents: `https://ui.yanisneverlies.com/llms.txt` is the index, `/llms-full.txt` is every page, and any docs page works as `/docs/<page>.md`.
 
 ## Develop
 

@@ -1,0 +1,87 @@
+---
+title: Command
+description: A search field over a list of actions. Type to filter, arrow keys to move, Enter to run.
+---
+
+<ComponentPreview name="command-demo" />
+
+## Installation
+
+<Install name="command" />
+
+## Usage
+
+```tsx title="Usage"
+import { BookOpen } from "lucide-react"
+
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandGroupLabel,
+  CommandInput,
+  CommandItem,
+  CommandItemIcon,
+  CommandItemMeta,
+  CommandItemText,
+  CommandList,
+} from "@/components/ui/command"
+
+export function Example() {
+  return (
+    <Command onAction={(value) => console.log(value)}>
+      <CommandInput aria-label="Search commands" placeholder="Type a command…" />
+      <CommandEmpty>No commands found.</CommandEmpty>
+      <CommandList>
+        <CommandGroup>
+          <CommandGroupLabel>Reading</CommandGroupLabel>
+          <CommandItem value="go-to-letter" label="Go to letter…">
+            <CommandItemIcon>
+              <BookOpen aria-hidden="true" />
+            </CommandItemIcon>
+            <CommandItemText>Go to letter…</CommandItemText>
+            <CommandItemMeta>1–124</CommandItemMeta>
+          </CommandItem>
+        </CommandGroup>
+      </CommandList>
+    </Command>
+  )
+}
+```
+
+Give the input an `aria-label` and every item a unique `value`. `onAction` receives the value of the command that ran. Keep `CommandEmpty` outside the list. `CommandItemMeta` puts muted text at the end of a row; `CommandShortcut` does the same for an item's `shortcut`. Groups and separators hide when filtering leaves them empty.
+
+## Command dialog
+
+`CommandDialog` is the root, like `Dialog`: it takes `open`, `onOpenChange` and the rest. Put a `CommandDialogTrigger` and a `CommandDialogContent` inside it. The content is a 640 px modal in the upper third of the page that opens without animation, since a palette is opened many times a day; it takes a `className` and a `title` for its screen-reader name. Put a `Command` in it and close it from `onAction`. `CommandFooter` adds a 48 px bar for action hints.
+
+<ComponentPreview name="command-dialog" />
+
+The button registers `mod+shift+k` through the trigger's `shortcut` and shows it with `CommandDialogShortcut`. This site's own search owns Cmd+K, so pick a key that's free in your app; in yours, `mod+k` is the usual choice.
+
+## API
+
+<AutoTypeTable path="./src/components/ui/command.tsx" name="CommandDialogContentOwnProps" />
+
+Common UI SDK options on `Command`:
+
+| Prop | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `onAction` | `(value, details) => unknown` | | Runs when a command runs. A returned Promise marks it pending. |
+| `query` | `string` | | The search text. Pass it, with `onQueryChange`, to control it. |
+| `filter` | `"fuzzy" \| "contains" \| "startsWith" \| false \| function` | | How typing narrows the list. `false` keeps every item, for results a server filtered. |
+| `loop` | `boolean` | | Whether arrow keys wrap. |
+| `autoHighlight` | `boolean` | | Whether the best match is highlighted, so Enter runs it. |
+| `items` | `CommandData` | | Commands as data, with pages for items that have `items`. |
+
+See [UI SDK Command](https://ui-sdk.dev/docs/components/command) for the rest, including pages, async results and virtualized lists.
+
+## Keyboard
+
+| Key | Action |
+| --- | --- |
+| Typing | Filters the commands and highlights the best match. |
+| Arrow Down, Arrow Up | Moves the highlight. |
+| Enter | Runs the highlighted command. |
+| Escape | Clears the search, then goes back a page. In a dialog, closes it. |
+| Backspace | In an empty search, goes back a page. |

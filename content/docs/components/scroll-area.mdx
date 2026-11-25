@@ -1,0 +1,55 @@
+---
+title: Scroll area
+description: Native scrolling with a quiet scrollbar that appears when you need it.
+---
+
+<ComponentPreview name="scroll-area-demo" />
+
+## Installation
+
+<Install name="scroll-area" />
+
+## Usage
+
+```tsx title="Usage"
+import { ScrollArea, ScrollAreaContent, ScrollAreaScrollbar, ScrollAreaViewport } from "@/components/ui/scroll-area"
+
+export function Letters() {
+  return (
+    <ScrollArea className="h-60 w-80">
+      <ScrollAreaViewport role="region" aria-label="Letters">
+        <ScrollAreaContent>Content to scroll</ScrollAreaContent>
+      </ScrollAreaViewport>
+      <ScrollAreaScrollbar />
+    </ScrollArea>
+  )
+}
+```
+
+Give the root a size. The viewport fills it. The browser still does the scrolling, so the wheel, touch and find in page work as usual.
+
+`ScrollAreaScrollbar` brings its own thumb. Pass children to replace it. The thumb is 6 px wide. The scrollbar is hidden until the pointer is over the area or it scrolls, and fades in over 150 ms. For a horizontal scrollbar add `orientation="horizontal"`. With both, add `ScrollAreaCorner`.
+
+## Keyboard
+
+The viewport is a tab stop when it scrolls and holds nothing focusable. If it holds links or fields, Tab reaches those instead.
+
+| Key | Action |
+| --- | --- |
+| Tab | Moves focus into the viewport. |
+| Arrow keys | Scroll a line. |
+| Page Up, Page Down, Space | Scroll a page. |
+| Home, End | Go to the start or end. |
+
+## API
+
+Scroll area has no props of its own. It takes every UI SDK `ScrollArea` prop. These are the ones people use most.
+
+| Prop | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `type` | `"hover" \| "scroll" \| "auto" \| "always"` | `"hover"` | When the scrollbars show. |
+| `scrollHideDelay` | `number` | `600` | Milliseconds a scrollbar stays after it stops being needed. |
+| `stickToEnd` | `boolean` | `false` | Keep the end in view as content grows, like a log. |
+| `controller` | `ScrollAreaController` | none | Scroll from outside. Create one with `createScrollAreaController()`. |
+
+`ScrollAreaScrollbar` takes `orientation`. See the [UI SDK reference](https://ui-sdk.dev/docs/components/scroll-area).

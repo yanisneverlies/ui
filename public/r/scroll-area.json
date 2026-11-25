@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "scroll-area",
+  "title": "Scroll Area",
+  "description": "Give it a size. The viewport fills it.",
+  "dependencies": [
+    "@ui-sdk/core",
+    "@ui-sdk/react"
+  ],
+  "registryDependencies": [
+    "@yanisneverlies/theme",
+    "@yanisneverlies/utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/scroll-area.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  ScrollArea as ScrollAreaPart,\n  ScrollAreaContent as ScrollAreaContentPart,\n  ScrollAreaCorner as ScrollAreaCornerPart,\n  ScrollAreaScrollbar as ScrollAreaScrollbarPart,\n  ScrollAreaThumb as ScrollAreaThumbPart,\n  ScrollAreaViewport as ScrollAreaViewportPart,\n} from \"@ui-sdk/react/scroll-area\"\n\nimport { cx } from \"@/lib/utils\"\n\n/** Give it a size. The viewport fills it. */\nfunction ScrollArea({ className, ...props }: React.ComponentProps<typeof ScrollAreaPart>) {\n  return <ScrollAreaPart className={cx(\"relative overflow-hidden\", className)} {...props} />\n}\n\n/** The native scroller. With nothing focusable inside it is a tab stop, so the keyboard can scroll it. */\nfunction ScrollAreaViewport({ className, ...props }: React.ComponentProps<typeof ScrollAreaViewportPart>) {\n  return <ScrollAreaViewportPart className={cx(\"size-full rounded-[inherit] focus-visible:-outline-offset-2\", className)} {...props} />\n}\n\nfunction ScrollAreaContent({ className, ...props }: React.ComponentProps<typeof ScrollAreaContentPart>) {\n  return <ScrollAreaContentPart className={className} {...props} />\n}\n\n/** Hidden until the pointer is over the area or it scrolls, then fades in over 150 ms. Brings its own thumb unless you pass children. */\nfunction ScrollAreaScrollbar({ className, children, ...props }: React.ComponentProps<typeof ScrollAreaScrollbarPart>) {\n  return (\n    <ScrollAreaScrollbarPart\n      className={cx(\n        \"flex touch-none select-none p-px opacity-0 transition-opacity duration-150 ease-(--ease-in) data-visible:opacity-100 data-visible:ease-(--ease-out) data-[orientation=horizontal]:h-2 data-[orientation=horizontal]:flex-col data-[orientation=vertical]:w-2\",\n        className\n      )}\n      {...props}\n    >\n      {children ?? <ScrollAreaThumb />}\n    </ScrollAreaScrollbarPart>\n  )\n}\n\n/** 6 px wide. It sizes and moves itself. */\nfunction ScrollAreaThumb({ className, ...props }: React.ComponentProps<typeof ScrollAreaThumbPart>) {\n  return (\n    <ScrollAreaThumbPart\n      className={cx(\"rounded-full bg-input data-dragging:bg-muted-foreground\", className)}\n      {...props}\n    />\n  )\n}\n\nfunction ScrollAreaCorner({ className, ...props }: React.ComponentProps<typeof ScrollAreaCornerPart>) {\n  return <ScrollAreaCornerPart className={className} {...props} />\n}\n\nexport { ScrollArea, ScrollAreaViewport, ScrollAreaContent, ScrollAreaScrollbar, ScrollAreaThumb, ScrollAreaCorner }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

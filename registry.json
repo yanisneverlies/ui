@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "yanisneverlies-ui",
-  "homepage": "https://github.com/yanisneverlies/ui",
+  "homepage": "https://ui.yanisneverlies.com",
   "items": [
     {
       "name": "theme",
@@ -435,6 +435,257 @@
       "files": [
         {
           "path": "src/components/ui/textarea.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "alert-dialog",
+      "type": "registry:ui",
+      "title": "Alert Dialog",
+      "description": "Centered on the page, like Dialog, but with no close button: the person has to choose. Brings its.",
+      "dependencies": [
+        "@ui-sdk/core",
+        "@ui-sdk/react"
+      ],
+      "registryDependencies": [
+        "@yanisneverlies/popup-classes",
+        "@yanisneverlies/theme",
+        "@yanisneverlies/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/alert-dialog.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "drawer",
+      "type": "registry:ui",
+      "title": "Drawer",
+      "description": "The drawer manages the backdrop's opacity, so it only gets a color.",
+      "dependencies": [
+        "@ui-sdk/core",
+        "@ui-sdk/react"
+      ],
+      "registryDependencies": [
+        "@yanisneverlies/popup-classes",
+        "@yanisneverlies/theme",
+        "@yanisneverlies/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/drawer.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "hover-card",
+      "type": "registry:ui",
+      "title": "Hover Card",
+      "description": "The link that opens the card. UI SDK renders an `<a>`, so give it an `href`.",
+      "dependencies": [
+        "@ui-sdk/core",
+        "@ui-sdk/react"
+      ],
+      "registryDependencies": [
+        "@yanisneverlies/popup-classes",
+        "@yanisneverlies/theme",
+        "@yanisneverlies/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/hover-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "command",
+      "type": "registry:ui",
+      "title": "Command",
+      "description": "The search field and the list share one column. Add your own surface, or put it in a CommandDialog.",
+      "dependencies": [
+        "@ui-sdk/core",
+        "@ui-sdk/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@yanisneverlies/popup-classes",
+        "@yanisneverlies/theme",
+        "@yanisneverlies/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/command.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "combobox",
+      "type": "registry:ui",
+      "title": "Combobox",
+      "description": "Lets the popup match the width of the whole box (input, chips and chevron), not just the input.",
+      "dependencies": [
+        "@ui-sdk/core",
+        "@ui-sdk/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@yanisneverlies/badge",
+        "@yanisneverlies/popup-classes",
+        "@yanisneverlies/theme",
+        "@yanisneverlies/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/combobox.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "radio",
+      "type": "registry:ui",
+      "title": "Radio",
+      "description": "Classes for a `Field` that holds a radio: the radio sits in a 20px column beside its label, and the.",
+      "dependencies": [
+        "@ui-sdk/core",
+        "@ui-sdk/react"
+      ],
+      "registryDependencies": [
+        "@yanisneverlies/theme",
+        "@yanisneverlies/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/radio.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "slider",
+      "type": "registry:ui",
+      "title": "Slider",
+      "description": "Where presses land. Taller than the track so it is easy to hit: 24px, 44px on coarse pointers.",
+      "dependencies": [
+        "@ui-sdk/core",
+        "@ui-sdk/react"
+      ],
+      "registryDependencies": [
+        "@yanisneverlies/theme",
+        "@yanisneverlies/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/slider.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "toggle",
+      "type": "registry:ui",
+      "title": "Toggle",
+      "description": "Toggle's own props. It also takes every UI SDK Toggle prop: `pressed`, `defaultPressed`, `onPressedChange`, `value` (inside a group), `disabled`.",
+      "dependencies": [
+        "@ui-sdk/core",
+        "@ui-sdk/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@yanisneverlies/sound",
+        "@yanisneverlies/theme",
+        "@yanisneverlies/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/toggle.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "Progress",
+      "description": "The label sits on the left and the value on the right, above a full-width track.",
+      "dependencies": [
+        "@ui-sdk/core",
+        "@ui-sdk/react"
+      ],
+      "registryDependencies": [
+        "@yanisneverlies/theme",
+        "@yanisneverlies/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/progress.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "Avatar",
+      "description": "Avatar's own props. It also takes every UI SDK `Avatar` prop.",
+      "dependencies": [
+        "@ui-sdk/core",
+        "@ui-sdk/react"
+      ],
+      "registryDependencies": [
+        "@yanisneverlies/theme",
+        "@yanisneverlies/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/avatar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "scroll-area",
+      "type": "registry:ui",
+      "title": "Scroll Area",
+      "description": "Give it a size. The viewport fills it.",
+      "dependencies": [
+        "@ui-sdk/core",
+        "@ui-sdk/react"
+      ],
+      "registryDependencies": [
+        "@yanisneverlies/theme",
+        "@yanisneverlies/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/scroll-area.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "collapsible",
+      "type": "registry:ui",
+      "title": "Collapsible",
+      "description": "No surface of its own: one trigger and one panel. For a set of panels use Accordion.",
+      "dependencies": [
+        "@ui-sdk/core",
+        "@ui-sdk/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@yanisneverlies/theme",
+        "@yanisneverlies/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/collapsible.tsx",
           "type": "registry:ui"
         }
       ]

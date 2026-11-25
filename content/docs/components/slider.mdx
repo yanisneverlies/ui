@@ -1,0 +1,72 @@
+---
+title: Slider
+description: Pick a number or a range by dragging a thumb or with the arrow keys.
+---
+
+<ComponentPreview name="slider-demo" />
+
+## Installation
+
+<Install name="slider" />
+
+## Usage
+
+```tsx title="Usage"
+import { Field, FieldLabel } from "@/components/ui/field"
+import { Slider, SliderControl, SliderIndicator, SliderThumb, SliderTrack, SliderValue } from "@/components/ui/slider"
+
+export function LineHeight() {
+  return (
+    <Field>
+      <Slider defaultValue={1.6} min={1.4} max={2} step={0.1} format={{ minimumFractionDigits: 1 }}>
+        <div className="flex items-baseline justify-between gap-4">
+          <FieldLabel>Line height</FieldLabel>
+          <SliderValue />
+        </div>
+        <SliderControl>
+          <SliderTrack>
+            <SliderIndicator />
+            <SliderThumb />
+          </SliderTrack>
+        </SliderControl>
+      </Slider>
+    </Field>
+  )
+}
+```
+
+The field's label names the thumb. `SliderValue` shows the formatted value in `text-small` with tabular numbers, so it doesn't jitter while you drag. Screen readers hear the value from the thumb, not from `SliderValue`.
+
+## Range
+
+<ComponentPreview name="slider-range" />
+
+Pass an array as the value and render one thumb per number, each with an `index` and its own `aria-label`. The indicator fills the space between the first and last thumb, and thumbs never pass each other.
+
+## API
+
+Our slider adds no props of its own. It takes every UI SDK prop:
+
+| Prop | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `value` | `number \| number[]` | | The value, one number per thumb. Controls the slider. |
+| `defaultValue` | `number \| number[]` | | The value at first, when uncontrolled. |
+| `onValueChange` | `(value, details) => void` | | Runs on every step of a drag or key press. |
+| `onValueCommit` | `(value, details) => void` | | Runs once when the interaction ends. Use it to save. |
+| `min`, `max`, `step` | `number` | `0`, `100`, `1` | The bounds and the step size. |
+| `format` | `Intl.NumberFormatOptions \| function` | | How the value reads, on screen and to screen readers. |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | The axis. A vertical slider is 192px tall. |
+| `name` | `string` | | The name the value submits under. A range submits `"start/end"`. |
+| `disabled`, `readOnly` | `boolean` | `false` | Native form behavior. |
+
+See [UI SDK Slider](https://ui-sdk.dev/docs/components/slider) for the rest.
+
+## Keyboard
+
+| Key | Action |
+| --- | --- |
+| Tab | Moves focus to the next thumb. |
+| ArrowRight, ArrowUp | Raises the value by one step. |
+| ArrowLeft, ArrowDown | Lowers the value by one step. |
+| PageUp, PageDown | Moves by a large step, ten steps unless you set `largeStep`. |
+| Home, End | Goes to the minimum or maximum. |

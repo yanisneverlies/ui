@@ -1,3 +1,5 @@
+"use client"
+
 import { ArrowDownIcon, ArrowLeftIcon, ArrowRightIcon, ArrowUpIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"

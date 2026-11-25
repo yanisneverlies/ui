@@ -1,3 +1,5 @@
+"use client"
+
 import { Checkbox, CheckboxGroup } from "@/components/ui/checkbox"
 
 const options = [

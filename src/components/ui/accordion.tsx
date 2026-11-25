@@ -49,7 +49,7 @@ function AccordionTrigger({ className, children, level = 3, ...props }: Accordio
             <span className="min-w-0">{typeof children === "function" ? children(state) : children}</span>
             <ChevronDown
               aria-hidden="true"
-              className="size-4 shrink-0 text-muted-foreground transition-transform duration-200 ease-(--ease-out) in-data-open:rotate-180 motion-reduce:transition-none"
+              className="size-4 shrink-0 text-muted-foreground transition-transform duration-200 ease-(--ease-out) [[data-open]>&]:rotate-180 motion-reduce:transition-none"
             />
           </>
         )}

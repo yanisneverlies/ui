@@ -1,0 +1,80 @@
+---
+title: Alert dialog
+description: A dialog for a decision that can't be undone. It has no close button and ignores outside presses, so the person has to choose.
+---
+
+<ComponentPreview name="alert-dialog-demo" />
+
+## Installation
+
+<Install name="alert-dialog" />
+
+## Usage
+
+```tsx title="Usage"
+import { Button } from "@/components/ui/button"
+import {
+  AlertDialog,
+  AlertDialogClose,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+
+export function Example() {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger render={<Button variant="destructive" />}>Delete highlights</AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Delete all highlights in Letter 1?</AlertDialogTitle>
+          <AlertDialogDescription>This can't be undone. The letter itself stays.</AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogClose render={<Button variant="ghost" />}>Cancel</AlertDialogClose>
+          <AlertDialogClose value="confirm" render={<Button variant="destructive" />}>
+            Delete
+          </AlertDialogClose>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}
+```
+
+`AlertDialogContent` brings its own backdrop. Put the question in the title and what happens in the description. Every answer is an `AlertDialogClose`; the one with `value="confirm"` is the agreeing answer, and `details.returnValue` reports it in `onOpenChange`. Use `destructive` for the Button that removes something, and name it with a verb.
+
+Use [Dialog](/docs/components/dialog) when the person can back out by clicking outside or pressing a close button.
+
+## Pending action
+
+Give an `AlertDialogClose` an `action` that returns a Promise. The dialog stays open while it runs, the part gets `data-pending`, and Cancel and Escape do nothing until it settles. A rejection keeps the dialog open.
+
+<ComponentPreview name="alert-dialog-pending" />
+
+## API
+
+This component has no own props. Common UI SDK options:
+
+| Prop | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `open` | `boolean` | | Whether the dialog is open. Pass it to control the dialog. |
+| `defaultOpen` | `boolean` | `false` | Whether the dialog starts open, when uncontrolled. |
+| `onOpenChange` | `(open, details) => void` | | Runs when the dialog wants to open or close. `details.reason` says why and `details.returnValue` is the `value` of the answer. |
+| `pendingAnnouncement` | `string` | | On `AlertDialog`. What screen readers hear after an `action` has run for a second. |
+| `value` | `string` | | On `AlertDialogClose`. Reported as `returnValue`. `"confirm"` is the agreeing answer. |
+| `action` | `(event, details) => unknown` | | On `AlertDialogClose`. Runs before it closes. A returned Promise keeps the dialog open. |
+| `initialFocus` | `DialogInitialFocus` | first focusable | On `AlertDialogContent`. Where focus goes when it opens. |
+
+See [UI SDK Alert Dialog](https://ui-sdk.dev/docs/components/alert-dialog) for the rest, including `createConfirm()` for asking from an event handler.
+
+## Keyboard
+
+| Key | Action |
+| --- | --- |
+| Enter, Space | On the trigger, opens the dialog. |
+| Tab, Shift+Tab | Moves between the answers. Focus stays inside. |
+| Escape | Closes the dialog and returns focus to the trigger. |

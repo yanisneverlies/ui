@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "slider",
+  "title": "Slider",
+  "description": "Where presses land. Taller than the track so it is easy to hit: 24px, 44px on coarse pointers.",
+  "dependencies": [
+    "@ui-sdk/core",
+    "@ui-sdk/react"
+  ],
+  "registryDependencies": [
+    "@yanisneverlies/theme",
+    "@yanisneverlies/utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/slider.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  Slider as SliderPart,\n  SliderControl as SliderControlPart,\n  SliderIndicator as SliderIndicatorPart,\n  SliderThumb as SliderThumbPart,\n  SliderTrack as SliderTrackPart,\n  SliderValue as SliderValuePart,\n} from \"@ui-sdk/react/slider\"\n\nimport { cx } from \"@/lib/utils\"\n\nfunction Slider({ className, ...props }: React.ComponentProps<typeof SliderPart>) {\n  return (\n    <SliderPart\n      className={cx(\"flex w-full flex-col gap-2 data-disabled:opacity-45 data-[orientation=vertical]:h-48 data-[orientation=vertical]:w-auto\", className)}\n      {...props}\n    />\n  )\n}\n\n/** Where presses land. Taller than the track so it is easy to hit: 24px, 44px on coarse pointers. */\nfunction SliderControl({ className, ...props }: React.ComponentProps<typeof SliderControlPart>) {\n  return (\n    <SliderControlPart\n      className={cx(\n        \"flex h-6 w-full touch-none items-center select-none pointer-coarse:h-11 data-[orientation=vertical]:h-full data-[orientation=vertical]:w-6 data-[orientation=vertical]:justify-center pointer-coarse:data-[orientation=vertical]:w-11\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\n/** The 3:1 rail. */\nfunction SliderTrack({ className, ...props }: React.ComponentProps<typeof SliderTrackPart>) {\n  return (\n    <SliderTrackPart\n      className={cx(\n        \"relative h-1.5 w-full rounded-full bg-input data-[orientation=vertical]:h-full data-[orientation=vertical]:w-1.5\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction SliderIndicator({ className, ...props }: React.ComponentProps<typeof SliderIndicatorPart>) {\n  return <SliderIndicatorPart className={cx(\"rounded-full bg-foreground\", className)} {...props} />\n}\n\n/** Draws a 2px ring when its hidden range input has keyboard focus. */\nfunction SliderThumb({ className, ...props }: React.ComponentProps<typeof SliderThumbPart>) {\n  return (\n    <SliderThumbPart\n      className={cx(\n        \"relative size-4 rounded-full border border-input bg-background shadow-float outline-none after:absolute after:-inset-1 pointer-coarse:after:-inset-3.5 after:content-[''] has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-foreground data-dragging:border-foreground\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\n/** The formatted value, or a range joined with an en dash. */\nfunction SliderValue({ className, ...props }: React.ComponentProps<typeof SliderValuePart>) {\n  return <SliderValuePart className={cx(\"text-small text-muted-foreground tnum\", className)} {...props} />\n}\n\nexport { Slider, SliderControl, SliderTrack, SliderIndicator, SliderThumb, SliderValue }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

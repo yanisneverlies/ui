@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "alert-dialog",
+  "title": "Alert Dialog",
+  "description": "Centered on the page, like Dialog, but with no close button: the person has to choose. Brings its.",
+  "dependencies": [
+    "@ui-sdk/core",
+    "@ui-sdk/react"
+  ],
+  "registryDependencies": [
+    "@yanisneverlies/popup-classes",
+    "@yanisneverlies/theme",
+    "@yanisneverlies/utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/alert-dialog.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  AlertDialog,\n  AlertDialogBackdrop as AlertDialogBackdropPart,\n  AlertDialogClose,\n  AlertDialogContent as AlertDialogContentPart,\n  AlertDialogDescription as AlertDialogDescriptionPart,\n  AlertDialogTitle as AlertDialogTitlePart,\n  AlertDialogTrigger,\n} from \"@ui-sdk/react/alert-dialog\"\n\nimport { cn, cx } from \"@/lib/utils\"\nimport { backdropClasses, modalPanel, popupSurface } from \"./popup-classes\"\n\nfunction AlertDialogBackdrop({ className, ...props }: React.ComponentProps<typeof AlertDialogBackdropPart>) {\n  return <AlertDialogBackdropPart className={cx(backdropClasses, className)} {...props} />\n}\n\ntype AlertDialogContentProps = React.ComponentProps<typeof AlertDialogContentPart>\n\n/**\n * Centered on the page, like Dialog, but with no close button: the person has to choose. Brings its\n * backdrop along, and an outside press never closes it.\n */\nfunction AlertDialogContent({ className, children, ...props }: AlertDialogContentProps) {\n  return (\n    <>\n      <AlertDialogBackdrop />\n      <AlertDialogContentPart className={cx(cn(popupSurface, modalPanel), className)} {...props}>\n        {children}\n      </AlertDialogContentPart>\n    </>\n  )\n}\n\nfunction AlertDialogHeader({ className, ...props }: React.ComponentProps<\"div\">) {\n  return <div data-slot=\"alert-dialog-header\" className={cn(\"flex flex-col gap-2\", className)} {...props} />\n}\n\nfunction AlertDialogTitle({ className, ...props }: React.ComponentProps<typeof AlertDialogTitlePart>) {\n  return (\n    <AlertDialogTitlePart\n      className={cx(\"font-display text-title font-normal tracking-[-0.01em]\", className)}\n      {...props}\n    />\n  )\n}\n\nfunction AlertDialogDescription({ className, ...props }: React.ComponentProps<typeof AlertDialogDescriptionPart>) {\n  return <AlertDialogDescriptionPart className={cx(\"text-body text-muted-foreground\", className)} {...props} />\n}\n\n/** Answers at the end of the dialog. The one that agrees goes last. */\nfunction AlertDialogFooter({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"alert-dialog-footer\"\n      className={cn(\"mt-6 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end\", className)}\n      {...props}\n    />\n  )\n}\n\nexport {\n  AlertDialog,\n  AlertDialogTrigger,\n  AlertDialogBackdrop,\n  AlertDialogContent,\n  AlertDialogHeader,\n  AlertDialogTitle,\n  AlertDialogDescription,\n  AlertDialogFooter,\n  AlertDialogClose,\n  type AlertDialogContentProps,\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

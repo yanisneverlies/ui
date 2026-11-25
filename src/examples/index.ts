@@ -2,6 +2,11 @@ import type { ComponentType } from "react"
 
 import AccordionDemoExample from "./accordion-demo"
 import AccordionMultipleExample from "./accordion-multiple"
+import AlertDialogDemoExample from "./alert-dialog-demo"
+import AlertDialogPendingExample from "./alert-dialog-pending"
+import AvatarDemoExample from "./avatar-demo"
+import AvatarGroupExample from "./avatar-group"
+import AvatarImageExample from "./avatar-image"
 import BadgeShapesExample from "./badge-shapes"
 import BadgeTonesExample from "./badge-tones"
 import ButtonAsChildExample from "./button-as-child"
@@ -14,13 +19,22 @@ import CardSurfaceExample from "./card-surface"
 import CheckboxDemoExample from "./checkbox-demo"
 import CheckboxFieldExample from "./checkbox-field"
 import CheckboxGroupExample from "./checkbox-group"
+import CollapsibleDemoExample from "./collapsible-demo"
+import ComboboxDemoExample from "./combobox-demo"
+import ComboboxMultipleExample from "./combobox-multiple"
+import CommandDemoExample from "./command-demo"
+import CommandDialogExample from "./command-dialog"
 import DialogControlledExample from "./dialog-controlled"
 import DialogDemoExample from "./dialog-demo"
 import DialogFormExample from "./dialog-form"
+import DrawerDemoExample from "./drawer-demo"
+import DrawerSidesExample from "./drawer-sides"
 import FieldDemoExample from "./field-demo"
 import FieldErrorExample from "./field-error"
 import FieldInvalidExample from "./field-invalid"
 import FieldSetExample from "./field-set"
+import HoverCardDemoExample from "./hover-card-demo"
+import HoverCardLinkExample from "./hover-card-link"
 import InputDemoExample from "./input-demo"
 import InputSearchExample from "./input-search"
 import InputStatesExample from "./input-states"
@@ -31,11 +45,17 @@ import MenuPendingExample from "./menu-pending"
 import PopoverDemoExample from "./popover-demo"
 import PopoverFormExample from "./popover-form"
 import PopoverPlacementExample from "./popover-placement"
+import ProgressDemoExample from "./progress-demo"
+import ProgressIndeterminateExample from "./progress-indeterminate"
+import RadioDemoExample from "./radio-demo"
+import ScrollAreaDemoExample from "./scroll-area-demo"
 import SegmentedControlDemoExample from "./segmented-control-demo"
 import SegmentedControlFieldExample from "./segmented-control-field"
 import SelectControlledExample from "./select-controlled"
 import SelectDemoExample from "./select-demo"
 import SelectGroupsExample from "./select-groups"
+import SliderDemoExample from "./slider-demo"
+import SliderRangeExample from "./slider-range"
 import SoundToggleExample from "./sound-toggle"
 import SwitchDemoExample from "./switch-demo"
 import TabsDemoExample from "./tabs-demo"
@@ -47,6 +67,8 @@ import TextareaInvalidExample from "./textarea-invalid"
 import ToastActionExample from "./toast-action"
 import ToastDemoExample from "./toast-demo"
 import ToastTypesExample from "./toast-types"
+import ToggleDemoExample from "./toggle-demo"
+import ToggleTextExample from "./toggle-text"
 import TooltipDemoExample from "./tooltip-demo"
 import TooltipShortcutExample from "./tooltip-shortcut"
 import TooltipSideExample from "./tooltip-side"
@@ -54,6 +76,11 @@ import TooltipSideExample from "./tooltip-side"
 export const examples = {
   "accordion-demo": AccordionDemoExample,
   "accordion-multiple": AccordionMultipleExample,
+  "alert-dialog-demo": AlertDialogDemoExample,
+  "alert-dialog-pending": AlertDialogPendingExample,
+  "avatar-demo": AvatarDemoExample,
+  "avatar-group": AvatarGroupExample,
+  "avatar-image": AvatarImageExample,
   "badge-shapes": BadgeShapesExample,
   "badge-tones": BadgeTonesExample,
   "button-as-child": ButtonAsChildExample,
@@ -66,13 +93,22 @@ export const examples = {
   "checkbox-demo": CheckboxDemoExample,
   "checkbox-field": CheckboxFieldExample,
   "checkbox-group": CheckboxGroupExample,
+  "collapsible-demo": CollapsibleDemoExample,
+  "combobox-demo": ComboboxDemoExample,
+  "combobox-multiple": ComboboxMultipleExample,
+  "command-demo": CommandDemoExample,
+  "command-dialog": CommandDialogExample,
   "dialog-controlled": DialogControlledExample,
   "dialog-demo": DialogDemoExample,
   "dialog-form": DialogFormExample,
+  "drawer-demo": DrawerDemoExample,
+  "drawer-sides": DrawerSidesExample,
   "field-demo": FieldDemoExample,
   "field-error": FieldErrorExample,
   "field-invalid": FieldInvalidExample,
   "field-set": FieldSetExample,
+  "hover-card-demo": HoverCardDemoExample,
+  "hover-card-link": HoverCardLinkExample,
   "input-demo": InputDemoExample,
   "input-search": InputSearchExample,
   "input-states": InputStatesExample,
@@ -83,11 +119,17 @@ export const examples = {
   "popover-demo": PopoverDemoExample,
   "popover-form": PopoverFormExample,
   "popover-placement": PopoverPlacementExample,
+  "progress-demo": ProgressDemoExample,
+  "progress-indeterminate": ProgressIndeterminateExample,
+  "radio-demo": RadioDemoExample,
+  "scroll-area-demo": ScrollAreaDemoExample,
   "segmented-control-demo": SegmentedControlDemoExample,
   "segmented-control-field": SegmentedControlFieldExample,
   "select-controlled": SelectControlledExample,
   "select-demo": SelectDemoExample,
   "select-groups": SelectGroupsExample,
+  "slider-demo": SliderDemoExample,
+  "slider-range": SliderRangeExample,
   "sound-toggle": SoundToggleExample,
   "switch-demo": SwitchDemoExample,
   "tabs-demo": TabsDemoExample,
@@ -99,6 +141,8 @@ export const examples = {
   "toast-action": ToastActionExample,
   "toast-demo": ToastDemoExample,
   "toast-types": ToastTypesExample,
+  "toggle-demo": ToggleDemoExample,
+  "toggle-text": ToggleTextExample,
   "tooltip-demo": TooltipDemoExample,
   "tooltip-shortcut": TooltipShortcutExample,
   "tooltip-side": TooltipSideExample,

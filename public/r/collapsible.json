@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "collapsible",
+  "title": "Collapsible",
+  "description": "No surface of its own: one trigger and one panel. For a set of panels use Accordion.",
+  "dependencies": [
+    "@ui-sdk/core",
+    "@ui-sdk/react",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "@yanisneverlies/theme",
+    "@yanisneverlies/utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/collapsible.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  Collapsible as CollapsiblePart,\n  CollapsiblePanel as CollapsiblePanelPart,\n  CollapsibleTrigger as CollapsibleTriggerPart,\n} from \"@ui-sdk/react/collapsible\"\nimport { ChevronDown } from \"lucide-react\"\n\nimport { cx } from \"@/lib/utils\"\n\n/** No surface of its own: one trigger and one panel. For a set of panels use Accordion. */\nfunction Collapsible(props: React.ComponentProps<typeof CollapsiblePart>) {\n  return <CollapsiblePart {...props} />\n}\n\n/** A ghost row. The chevron turns 180° in 200 ms while the panel is open. */\nfunction CollapsibleTrigger({ className, children, ...props }: React.ComponentProps<typeof CollapsibleTriggerPart>) {\n  return (\n    <CollapsibleTriggerPart\n      className={cx(\n        \"flex min-h-10 w-full items-center justify-between gap-4 rounded-lg px-3 py-2 text-start text-body font-medium text-soft-foreground transition-colors duration-150 ease-(--ease-out) hover:bg-secondary hover:text-foreground data-disabled:opacity-45\",\n        className\n      )}\n      {...props}\n    >\n      {(state) => (\n        <>\n          <span className=\"min-w-0\">{typeof children === \"function\" ? children(state) : children}</span>\n          <ChevronDown\n            aria-hidden=\"true\"\n            className=\"size-4 shrink-0 text-muted-foreground transition-transform duration-200 ease-(--ease-out) [[data-open]>&]:rotate-180 motion-reduce:transition-none\"\n          />\n        </>\n      )}\n    </CollapsibleTriggerPart>\n  )\n}\n\n/** Opens to its content's height. With reduced motion it opens at once. */\nfunction CollapsiblePanel({ className, children, ...props }: React.ComponentProps<typeof CollapsiblePanelPart>) {\n  return (\n    <CollapsiblePanelPart\n      className={cx(\n        \"h-(--collapsible-panel-height) overflow-hidden text-body text-soft-foreground transition-[height] duration-200 ease-(--ease-out) data-starting-style:h-0 data-ending-style:h-0 motion-reduce:transition-none\",\n        className\n      )}\n      {...props}\n    >\n      {(state) => <div className=\"px-3 py-2\">{typeof children === \"function\" ? children(state) : children}</div>}\n    </CollapsiblePanelPart>\n  )\n}\n\nexport { Collapsible, CollapsibleTrigger, CollapsiblePanel }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

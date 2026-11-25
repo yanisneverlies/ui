@@ -1,0 +1,57 @@
+---
+title: Progress
+description: A thin bar for how far a task has come, or that it is still working when nobody knows how far.
+---
+
+<ComponentPreview name="progress-demo" />
+
+## Installation
+
+<Install name="progress" />
+
+## Usage
+
+```tsx title="Usage"
+import { Progress, ProgressIndicator, ProgressLabel, ProgressTrack, ProgressValue } from "@/components/ui/progress"
+
+export function ReadingProgress() {
+  return (
+    <Progress value={62}>
+      <ProgressLabel>Reading progress, Letter 1</ProgressLabel>
+      <ProgressValue />
+      <ProgressTrack>
+        <ProgressIndicator />
+      </ProgressTrack>
+    </Progress>
+  )
+}
+```
+
+The label sits on the left and the value on the right, above the track. Leave the label and value out for a bare bar, and give the root an `aria-label` instead.
+
+The indicator is the brand orange because progress marks a current position. It grows over 200 ms, and not at all with reduced motion.
+
+## Indeterminate
+
+<ComponentPreview name="progress-indeterminate" />
+
+Pass `value={null}` when you don't know how far along the task is. A segment 30% of the track wide slides across on a 1.2 second loop. With reduced motion the segment fills the track and its opacity pulses slowly instead, so nothing moves. Screen readers get no percentage.
+
+## Progress or Meter
+
+Progress is for a task that will finish. For a reading within a known range, like storage used, use Meter from UI SDK.
+
+## API
+
+Progress has no props of its own. It takes every UI SDK `Progress` prop. These are the ones people use most.
+
+| Prop | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `value` | `number \| null` | none | How far the task has come. `null` means unknown. |
+| `min` | `number` | `0` | The lowest value. |
+| `max` | `number` | `100` | The highest value. |
+| `format` | `Intl.NumberFormatOptions \| (value) => string` | percent | How the value reads, for the visible value and screen readers. |
+| `getValueLabel` | `(value, details) => string` | none | Text for screen readers when the number says too little, like "3 of 12 files". |
+| `locale` | `string` | page language | The locale the value is formatted in. |
+
+See the [UI SDK reference](https://ui-sdk.dev/docs/components/progress).

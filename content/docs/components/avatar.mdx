@@ -1,0 +1,47 @@
+---
+title: Avatar
+description: A person or team as an image, with initials while it loads or if it fails.
+---
+
+<ComponentPreview name="avatar-demo" />
+
+## Installation
+
+<Install name="avatar" />
+
+## Usage
+
+```tsx title="Usage"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
+export function Reader() {
+  return (
+    <Avatar role="img" aria-label="Lucilius">
+      <AvatarImage src="/lucilius.png" alt="" />
+      <AvatarFallback>L</AvatarFallback>
+    </Avatar>
+  )
+}
+```
+
+The fallback shows until the image loads, and stays if it fails. Name the person on the root with `aria-label`, as above, or put visually hidden text in the fallback. When a visible name sits beside the avatar, use an empty `alt` and `aria-hidden` on the fallback.
+
+At `sm` (24 px) a text fallback shrinks to its first letter. Pass elements instead of a string to keep what you wrote.
+
+## Image
+
+<ComponentPreview name="avatar-image" />
+
+The image covers the avatar. This one is a small SVG data URI, so it needs no file and no network request.
+
+## Group
+
+<ComponentPreview name="avatar-group" />
+
+`AvatarGroup` overlaps its avatars by 8 px. Each gets a 2 px ring in the page color so the overlap reads. That ring is one of the few edges we keep (see the decisions list), and it is there to separate, not to decorate. Give the group an `aria-label`.
+
+## API
+
+<AutoTypeTable path="./src/components/ui/avatar.tsx" name="AvatarOwnProps" />
+
+Avatar also takes every UI SDK `Avatar` prop, such as `onLoadingStatusChange`. `AvatarFallback` takes `delay`, in milliseconds, to avoid flashing initials when an image loads fast. See the [UI SDK reference](https://ui-sdk.dev/docs/components/avatar).

@@ -9,5 +9,6 @@ What's decided, and why. Change one only on purpose, and add the date.
 - **2026-11-25 · One `--radius` knob.** Every corner derives from it; a shell card adds its inset, so nested curves stay concentric.
 - **2026-11-25 · Sound off by default,** through cuelume behind `SoundProvider`, with a visible mute.
 - **2026-11-25 · One toast at a time.** A new toast replaces the last, like a status line, instead of a stack.
-- **2026-11-25 · No dividers.** Space and tone separate. Menu and select separators render as 8px of space. Kept borders: the 3:1 input edge and the keycap Kbd.
+- **2026-11-25 · No dividers.** Space and tone separate. Menu and select separators render as 8px of space. Kept borders: the 3:1 input edge (inputs, select and combobox boxes, checkboxes, radios, the slider thumb), the keycap Kbd, and the background-colored ring between overlapping avatars.
 - **2026-11-25 · Distributed as a shadcn registry.** Source is copied into the project; there's no package to version.
+- **2026-11-25 · "On" looks the same everywhere.** A checked switch, a checked checkbox and a pressed toggle all fill with `foreground`, so the on state reads at 3:1 or better in both themes.

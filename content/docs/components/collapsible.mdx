@@ -1,0 +1,48 @@
+---
+title: Collapsible
+description: One trigger that shows and hides one panel.
+---
+
+<ComponentPreview name="collapsible-demo" />
+
+## Installation
+
+<Install name="collapsible" />
+
+## Usage
+
+```tsx title="Usage"
+import { Collapsible, CollapsiblePanel, CollapsibleTrigger } from "@/components/ui/collapsible"
+
+export function Latin() {
+  return (
+    <Collapsible>
+      <CollapsibleTrigger>{(state) => (state.open ? "Hide the Latin" : "Show the Latin")}</CollapsibleTrigger>
+      <CollapsiblePanel>Ita fac, mi Lucili: vindica te tibi</CollapsiblePanel>
+    </Collapsible>
+  )
+}
+```
+
+A collapsible has no surface of its own. The trigger is a ghost row with a chevron that turns 180° over 200 ms, and the panel animates its height. With reduced motion the panel opens at once. For a set of panels, use Accordion.
+
+## Keyboard
+
+| Key | Action |
+| --- | --- |
+| Tab | Moves focus to the trigger. |
+| Enter, Space | Opens or closes the panel. |
+
+## API
+
+Collapsible has no props of its own. It takes every UI SDK `Collapsible` prop. These are the ones people use most.
+
+| Prop | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `open` | `boolean` | none | Whether the panel is open. Pass it to control the collapsible. |
+| `defaultOpen` | `boolean` | `false` | Whether it is open at first. |
+| `onOpenChange` | `(open, details) => void` | none | Runs when the panel opens or closes. |
+| `disabled` | `boolean` | `false` | Stops the trigger from opening or closing the panel. |
+| `controller` | `CollapsibleController` | none | Open and close from outside. |
+
+`CollapsiblePanel` takes `keepMounted`, to keep a closed panel in the page, and `hiddenUntilFound`, so find in page can open it. See the [UI SDK reference](https://ui-sdk.dev/docs/components/collapsible).

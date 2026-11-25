@@ -38,7 +38,7 @@ The library never imports from docs, site or examples. Behavior (focus, keyboard
 
 - Spacing only 4 / 8 / 12 / 16 / 24 / 32 / 48 (Tailwind 1, 2, 3, 4, 6, 8, 12).
 - At most four type sizes per screen: `text-small` 13, `text-body` 15, `text-title` 20, `text-display` 40 (`text-lead` 17 only on the landing page).
-- No dividing borders or `<hr>`; separate with space and tone. Kept on purpose: the 3:1 `border-input` edge on inputs, select triggers and checkboxes, and the keycap Kbd.
+- No dividing borders or `<hr>`; separate with space and tone. Kept on purpose: the 3:1 `border-input` edge on inputs, select and combobox boxes, checkboxes, radios and the slider thumb; the keycap Kbd; and the `ring-background` gap between overlapping avatars.
 - Primary (`#dd3400`) is for the one main action. Orange text uses `brand-strong`. `destructive` is for errors only.
 - Motion 150–300 ms, ease-out in, ease-in out. Reduced motion keeps opacity only.
 - Real content only: no lorem, no placeholder names. Use Seneca's letters (public-domain Gummere translation), this repo's own data, or plausible product settings.
@@ -46,16 +46,19 @@ The library never imports from docs, site or examples. Behavior (focus, keyboard
 
 ## Ownership right now
 
-One owner per file. If you need a change in a file you don't own, say so in your report instead of making it.
+One owner per file. If you need a change in a file you don't own, say so in your report instead of making it. The spec for the current batch is `specs/batch-3.md`.
 
 | Owner | Files |
 |---|---|
-| Lead | `CONTRACT.md`, `API.md`, `DECISIONS.md`, `src/lib/*`, `src/styles/*`, `src/examples/index.ts`, `content/docs/components/meta.json`, `src/components/mdx.tsx`, `registry.json` |
-| Fix: components | `src/components/ui/*` |
-| Fix: docs | `content/docs/**` (except meta.json), `src/examples/*.tsx` (except index.ts), `src/components/docs/**`, `src/components/search/**`, `src/components/site/**`, `src/app/global.css` |
+| Lead | `CONTRACT.md`, `API.md`, `DECISIONS.md`, `specs/*`, `src/lib/*`, `src/styles/*`, `src/components/ui/popup-classes.ts`, existing `src/components/ui/*` files except `accordion.tsx` (Fix pass owns it now), `src/examples/index.ts`, `content/docs/components/meta.json`, `src/components/mdx.tsx`, `registry.json` |
+| Fix pass (batch 3) | all batch 3 components, examples and docs pages, plus `src/components/ui/accordion.tsx` and `src/app/global.css` |
+| Overlays (done) | `alert-dialog`, `drawer`, `hover-card`, `command`: their `src/components/ui/<name>.tsx`, `src/examples/<name>-*.tsx`, `content/docs/components/<name>.mdx` |
+| Forms | `combobox`, `radio`, `slider`, `toggle`: same three kinds of file |
+| Display | `progress`, `avatar`, `scroll-area`, `collapsible`: same three kinds of file |
 
 ## Commands
 
 - Typecheck: `npx tsc --noEmit`. Safe to run any time.
+- Examples check: `npm run check`. Fails if an example passes a function or uses a hook without "use client". `npm run build` runs it first.
 - Do not run `next build` or `next dev`: several agents share this folder and the build output. The lead builds.
 - Registry check: `npx shadcn build` (Registry owner only).

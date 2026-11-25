@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "hover-card",
+  "title": "Hover Card",
+  "description": "The link that opens the card. UI SDK renders an `<a>`, so give it an `href`.",
+  "dependencies": [
+    "@ui-sdk/core",
+    "@ui-sdk/react"
+  ],
+  "registryDependencies": [
+    "@yanisneverlies/popup-classes",
+    "@yanisneverlies/theme",
+    "@yanisneverlies/utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/hover-card.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  HoverCard,\n  HoverCardContent as HoverCardContentPart,\n  HoverCardTrigger as HoverCardTriggerPart,\n} from \"@ui-sdk/react/hover-card\"\n\nimport { cn, cx } from \"@/lib/utils\"\nimport { popupMotion, popupSurface } from \"./popup-classes\"\n\n/** The link that opens the card. UI SDK renders an `<a>`, so give it an `href`. */\nfunction HoverCardTrigger({ className, ...props }: React.ComponentProps<typeof HoverCardTriggerPart>) {\n  return (\n    <HoverCardTriggerPart\n      className={cx(\n        \"rounded-xs underline decoration-muted-foreground underline-offset-4 hover:decoration-foreground\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction HoverCardContent({ className, sideOffset = 8, ...props }: React.ComponentProps<typeof HoverCardContentPart>) {\n  return (\n    <HoverCardContentPart\n      sideOffset={sideOffset}\n      className={cx(\n        cn(popupSurface, popupMotion, \"flex w-72 max-w-[calc(100vw-16px)] flex-col gap-2 rounded-lg p-4\"),\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { HoverCard, HoverCardTrigger, HoverCardContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

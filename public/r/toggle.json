@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toggle",
+  "title": "Toggle",
+  "description": "Toggle's own props. It also takes every UI SDK Toggle prop: `pressed`, `defaultPressed`, `onPressedChange`, `value` (inside a group), `disabled`.",
+  "dependencies": [
+    "@ui-sdk/core",
+    "@ui-sdk/react",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "@yanisneverlies/sound",
+    "@yanisneverlies/theme",
+    "@yanisneverlies/utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/toggle.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Toggle as TogglePart, ToggleGroup as ToggleGroupPart, ToggleIcon } from \"@ui-sdk/react/toggle\"\nimport { cva } from \"class-variance-authority\"\n\nimport { cx } from \"@/lib/utils\"\nimport { useSound, type SoundProp } from \"@/lib/sound\"\n\nconst toggleVariants = cva(\n  [\n    \"pressable relative inline-flex shrink-0 items-center justify-center gap-2 font-medium whitespace-nowrap select-none\",\n    \"text-soft-foreground hover:bg-secondary hover:text-foreground data-pressed:bg-foreground data-pressed:text-background data-pressed:hover:bg-foreground/90 data-pressed:hover:text-background\",\n    \"data-disabled:pointer-events-none data-disabled:opacity-45 aria-disabled:pointer-events-none aria-disabled:opacity-45\",\n    \"[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4\",\n  ],\n  {\n    variants: {\n      size: {\n        sm: \"h-8 rounded-sm px-3 text-small pointer-coarse:after:absolute pointer-coarse:after:inset-x-0 pointer-coarse:after:-inset-y-1.5 pointer-coarse:after:content-['']\",\n        md: \"h-10 rounded-lg px-4 text-body\",\n        \"icon-sm\":\n          \"size-8 rounded-sm pointer-coarse:after:absolute pointer-coarse:after:-inset-1.5 pointer-coarse:after:content-['']\",\n        icon: \"size-10 rounded-lg\",\n      },\n    },\n    defaultVariants: { size: \"md\" },\n  }\n)\n\n/** Toggle's own props. It also takes every UI SDK Toggle prop: `pressed`, `defaultPressed`, `onPressedChange`, `value` (inside a group), `disabled`. */\ninterface ToggleOwnProps {\n  /**\n   * Height and padding. `icon` sizes are square; give them an `aria-label`.\n   * @defaultValue \"md\"\n   */\n  size?: \"sm\" | \"md\" | \"icon-sm\" | \"icon\"\n  /**\n   * Cue played when it flips, if sound is on. `false` silences it.\n   * @defaultValue \"toggle\"\n   */\n  sound?: SoundProp\n}\n\ntype ToggleProps = React.ComponentProps<typeof TogglePart> & ToggleOwnProps\n\n/** A button that stays pressed. Alone it owns its state; inside a `ToggleGroup`, the group decides. */\nfunction Toggle({ className, size = \"md\", sound = \"toggle\", onPressedChange, ...props }: ToggleProps) {\n  const { play } = useSound()\n  return (\n    <TogglePart\n      data-size={size}\n      className={cx(toggleVariants({ size }), className)}\n      onPressedChange={(pressed, details) => {\n        onPressedChange?.(pressed, details)\n        play(sound, { direction: pressed ? \"forward\" : \"back\" })\n      }}\n      {...props}\n    />\n  )\n}\n\n/** A tight row of toggles with one tab stop and arrow keys between them, like a toolbar. */\nfunction ToggleGroup<T extends string = string>({\n  className,\n  ...props\n}: React.ComponentProps<typeof ToggleGroupPart<T>>) {\n  return (\n    <ToggleGroupPart<T>\n      className={cx(\"inline-flex items-center gap-1 data-[orientation=vertical]:flex-col\", className)}\n      {...props}\n    />\n  )\n}\n\nexport { Toggle, ToggleGroup, ToggleIcon, toggleVariants, type ToggleProps, type ToggleOwnProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

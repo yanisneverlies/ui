@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "progress",
+  "title": "Progress",
+  "description": "The label sits on the left and the value on the right, above a full-width track.",
+  "dependencies": [
+    "@ui-sdk/core",
+    "@ui-sdk/react"
+  ],
+  "registryDependencies": [
+    "@yanisneverlies/theme",
+    "@yanisneverlies/utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/progress.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  Progress as ProgressPart,\n  ProgressIndicator as ProgressIndicatorPart,\n  ProgressLabel as ProgressLabelPart,\n  ProgressTrack as ProgressTrackPart,\n  ProgressValue as ProgressValuePart,\n} from \"@ui-sdk/react/progress\"\n\nimport { cx } from \"@/lib/utils\"\n\n/** The label sits on the left and the value on the right, above a full-width track. */\nfunction Progress({ className, ...props }: React.ComponentProps<typeof ProgressPart>) {\n  return <ProgressPart className={cx(\"grid w-full grid-cols-[1fr_auto] items-baseline gap-x-4 gap-y-2\", className)} {...props} />\n}\n\nfunction ProgressLabel({ className, ...props }: React.ComponentProps<typeof ProgressLabelPart>) {\n  return <ProgressLabelPart className={cx(\"min-w-0 text-small\", className)} {...props} />\n}\n\nfunction ProgressValue({ className, ...props }: React.ComponentProps<typeof ProgressValuePart>) {\n  return <ProgressValuePart className={cx(\"col-start-2 text-small text-muted-foreground tnum\", className)} {...props} />\n}\n\nfunction ProgressTrack({ className, ...props }: React.ComponentProps<typeof ProgressTrackPart>) {\n  return (\n    <ProgressTrackPart\n      className={cx(\"relative col-span-2 h-1 w-full overflow-hidden rounded-full bg-secondary\", className)}\n      {...props}\n    />\n  )\n}\n\n/** Its width follows the value over 200 ms. Without a value it becomes the sliding segment. */\nfunction ProgressIndicator({ className, ...props }: React.ComponentProps<typeof ProgressIndicatorPart>) {\n  return (\n    <ProgressIndicatorPart\n      className={cx(\n        \"block h-full rounded-full bg-brand transition-[width] duration-200 ease-(--ease-out) motion-reduce:transition-none\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { Progress, ProgressLabel, ProgressValue, ProgressTrack, ProgressIndicator }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

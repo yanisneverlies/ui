@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "avatar",
+  "title": "Avatar",
+  "description": "Avatar's own props. It also takes every UI SDK `Avatar` prop.",
+  "dependencies": [
+    "@ui-sdk/core",
+    "@ui-sdk/react"
+  ],
+  "registryDependencies": [
+    "@yanisneverlies/theme",
+    "@yanisneverlies/utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/avatar.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Avatar as AvatarPart, AvatarFallback as AvatarFallbackPart, AvatarImage as AvatarImagePart } from \"@ui-sdk/react/avatar\"\n\nimport { cn, cx } from \"@/lib/utils\"\n\ntype AvatarSize = \"sm\" | \"md\" | \"lg\"\n\nconst sizeClasses: Record<AvatarSize, string> = {\n  sm: \"size-6\",\n  md: \"size-8\",\n  lg: \"size-10\",\n}\n\nconst AvatarSizeContext = React.createContext<AvatarSize>(\"md\")\n\n/** Avatar's own props. It also takes every UI SDK `Avatar` prop. */\ninterface AvatarOwnProps {\n  /**\n   * The width and height: 24, 32 or 40 px. `sm` shows one letter of the fallback.\n   * @defaultValue \"md\"\n   */\n  size?: AvatarSize\n}\n\ntype AvatarProps = React.ComponentProps<typeof AvatarPart> & AvatarOwnProps\n\nfunction Avatar({ className, size = \"md\", ...props }: AvatarProps) {\n  return (\n    <AvatarSizeContext.Provider value={size}>\n      <AvatarPart\n        data-size={size}\n        className={cx(\n          `relative inline-flex shrink-0 select-none items-center justify-center overflow-hidden rounded-full bg-secondary ${sizeClasses[size]}`,\n          className\n        )}\n        {...props}\n      />\n    </AvatarSizeContext.Provider>\n  )\n}\n\n/** Covers the avatar once it loads. */\nfunction AvatarImage({ className, ...props }: React.ComponentProps<typeof AvatarImagePart>) {\n  return <AvatarImagePart className={cx(\"absolute inset-0 size-full object-cover\", className)} {...props} />\n}\n\n/** Initials while the image loads, and for good if it fails. At `sm` a text fallback shrinks to its first letter. */\nfunction AvatarFallback({ className, children, ...props }: React.ComponentProps<typeof AvatarFallbackPart>) {\n  const size = React.useContext(AvatarSizeContext)\n  return (\n    <AvatarFallbackPart\n      className={cx(\"flex size-full items-center justify-center text-small font-medium text-soft-foreground\", className)}\n      {...props}\n    >\n      {typeof children === \"string\" && size === \"sm\" ? Array.from(children)[0] : children}\n    </AvatarFallbackPart>\n  )\n}\n\n/** An overlapping row. Each avatar gets a 2px ring in the page color so the overlap reads. */\nfunction AvatarGroup({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      role=\"group\"\n      data-slot=\"avatar-group\"\n      className={cn(\"flex items-center -space-x-2 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-background\", className)}\n      {...props}\n    />\n  )\n}\n\nexport { Avatar, AvatarImage, AvatarFallback, AvatarGroup, type AvatarProps, type AvatarOwnProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

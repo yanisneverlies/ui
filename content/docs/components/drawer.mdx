@@ -1,0 +1,77 @@
+---
+title: Drawer
+description: A sheet that slides in from an edge. Swipe it away, press outside, or press Escape.
+---
+
+<ComponentPreview name="drawer-demo" />
+
+## Installation
+
+<Install name="drawer" />
+
+## Usage
+
+```tsx title="Usage"
+import { Button } from "@/components/ui/button"
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
+
+export function Example() {
+  return (
+    <Drawer>
+      <DrawerTrigger render={<Button />}>Your margin</DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Your margin</DrawerTitle>
+          <DrawerDescription>2 highlights from Letter 1.</DrawerDescription>
+        </DrawerHeader>
+        <DrawerFooter>
+          <DrawerClose render={<Button variant="ghost" />}>Close</DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  )
+}
+```
+
+`DrawerContent` brings its own backdrop. The drawer positions and moves the sheet itself, so we only size, color and round it. Put long content in an inner `min-h-0 flex-1 overflow-y-auto` area: a downward drag scrolls it first.
+
+## Sides
+
+Pass UI SDK's `side` to `Drawer`: `"bottom"` (the default), `"top"`, `"right"` or `"left"`. A bottom or top sheet is full width and at most 85% of the screen tall, with a 32 by 4 px handle bar on the edge that faces the page. A side sheet is full height and at most 400 px wide, rounded on its inner edge only.
+
+<ComponentPreview name="drawer-sides" />
+
+With reduced motion the sheet fades instead of sliding.
+
+## API
+
+This component has no own props: `side` is UI SDK's, set on `Drawer`. Common UI SDK options:
+
+| Prop | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `side` | `"bottom" \| "top" \| "left" \| "right" \| "start" \| "end"` | `"bottom"` | On `Drawer`. The edge it comes from. The content reads it as `data-side`. |
+| `open` | `boolean` | | Whether the drawer is open. Pass it to control it. |
+| `defaultOpen` | `boolean` | `false` | Whether it starts open, when uncontrolled. |
+| `onOpenChange` | `(open, details) => void` | | Runs when it wants to open or close. `details.reason` includes `"swipe"`. |
+| `dismissible` | `boolean` | `true` | Whether Escape, an outside press and a swipe can close it. |
+| `snapPoints` | `SnapPoint[]` | `["content"]` | Where the sheet can rest. |
+| `modal` | `boolean \| "trap-focus"` | `true` | `true` makes the page inert. |
+
+See [UI SDK Drawer](https://ui-sdk.dev/docs/components/drawer) for the rest, including snap points, nested drawers and controllers.
+
+## Keyboard
+
+| Key | Action |
+| --- | --- |
+| Enter, Space | On the trigger, opens the drawer. |
+| Tab, Shift+Tab | Moves through the sheet's controls. Focus stays inside while it's modal. |
+| Escape | Closes the topmost drawer when it's dismissible. |

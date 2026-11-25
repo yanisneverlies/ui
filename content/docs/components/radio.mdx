@@ -1,0 +1,67 @@
+---
+title: Radio
+description: Choose one option from a short list. Arrow keys move the selection, and the group has one tab stop.
+---
+
+<ComponentPreview name="radio-demo" />
+
+## Installation
+
+<Install name="radio" />
+
+## Usage
+
+```tsx title="Usage"
+import { Field, FieldDescription, FieldLabel } from "@/components/ui/field"
+import { Radio, RadioGroup, radioField } from "@/components/ui/radio"
+
+export function TextSize() {
+  return (
+    <Field>
+      <FieldLabel>Text size</FieldLabel>
+      <RadioGroup defaultValue="medium">
+        <Field className={radioField}>
+          <Radio value="small" />
+          <FieldLabel>Small</FieldLabel>
+          <FieldDescription>More lines on each screen.</FieldDescription>
+        </Field>
+        <Field className={radioField}>
+          <Radio value="medium" />
+          <FieldLabel>Medium</FieldLabel>
+          <FieldDescription>The default for most readers.</FieldDescription>
+        </Field>
+      </RadioGroup>
+    </Field>
+  )
+}
+```
+
+The outer field's label names the group. Give each radio its own `Field` so its label and description connect to it. Pass `radioField` as that field's `className`: it puts the radio in a 20px column and lines the description up under the label. Without a field, name the group with `aria-label`.
+
+The dot fades in over 150ms. The 3:1 edge keeps an empty radio visible, and the hit area grows to 44px on touch screens.
+
+## API
+
+Our radio adds no props of its own. It takes every UI SDK prop:
+
+| Prop | On | Type | Meaning |
+| --- | --- | --- | --- |
+| `value` | `RadioGroup` | `string \| null` | The checked value. Controls the group. `null` checks nothing. |
+| `defaultValue` | `RadioGroup` | `string \| null` | The radio checked at first, when uncontrolled. |
+| `onValueChange` | `RadioGroup` | `(value, details) => void` | Runs when the value wants to change. |
+| `name` | `RadioGroup` | `string` | The name the value submits under in a form. |
+| `disabled`, `readOnly`, `required` | `RadioGroup` | `boolean` | Native form behavior. |
+| `loop` | `RadioGroup` | `boolean` | Whether arrow keys wrap from the last radio to the first. |
+| `value` | `Radio` | `string` | What the group's value becomes when this radio is checked. |
+| `disabled` | `Radio` | `boolean` | Skips this radio. |
+
+See [UI SDK Radio](https://ui-sdk.dev/docs/components/radio) for the rest.
+
+## Keyboard
+
+| Key | Action |
+| --- | --- |
+| Tab | Moves focus into the group, to the checked radio or the first one. |
+| ArrowDown, ArrowRight | Checks the next radio. |
+| ArrowUp, ArrowLeft | Checks the previous radio. |
+| Space | Checks the focused radio. |

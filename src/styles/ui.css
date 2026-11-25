@@ -225,3 +225,34 @@
     }
   }
 }
+
+/*
+ * Indeterminate progress: a 30% segment slides across on a 1.2s linear loop. With reduced motion it fills
+ * the track and pulses its opacity slowly instead.
+ */
+@keyframes ui-progress-slide {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(333.34%); }
+}
+@keyframes ui-progress-slide-rtl {
+  from { transform: translateX(100%); }
+  to { transform: translateX(-333.34%); }
+}
+@keyframes ui-progress-pulse {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+[data-slot="progress-indicator"][data-indeterminate] {
+  width: 30%;
+  animation: ui-progress-slide 1.2s linear infinite;
+}
+[dir="rtl"] [data-slot="progress-indicator"][data-indeterminate] {
+  animation-name: ui-progress-slide-rtl;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-slot="progress-indicator"][data-indeterminate],
+  [dir="rtl"] [data-slot="progress-indicator"][data-indeterminate] {
+    width: 100%;
+    animation: ui-progress-pulse 2.4s ease-in-out infinite;
+  }
+}

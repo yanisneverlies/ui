@@ -1,0 +1,85 @@
+---
+title: Toggle
+description: A button that stays pressed, alone or in a group, with a toggle cue when sound is on.
+---
+
+<ComponentPreview name="toggle-demo" />
+
+## Installation
+
+<Install name="toggle" />
+
+## Usage
+
+```tsx title="Usage"
+import { Toggle } from "@/components/ui/toggle"
+
+export function FocusMode() {
+  return <Toggle size="sm">Focus mode</Toggle>
+}
+```
+
+The label stays the same in both states: screen readers announce whether the button is pressed. A toggle with only an icon needs an `aria-label`.
+
+## Text toggle
+
+<ComponentPreview name="toggle-text" />
+
+Pressed toggles fill with `foreground` and use `background` for the label, like a checked switch. Style your own states from `data-pressed`.
+
+## Group
+
+```tsx title="Group"
+import { Bold, Italic } from "lucide-react"
+
+import { Toggle, ToggleGroup, ToggleIcon } from "@/components/ui/toggle"
+
+export function Formatting() {
+  return (
+    <ToggleGroup multiple aria-label="Margin note formatting">
+      <Toggle value="bold" size="icon-sm" aria-label="Bold">
+        <ToggleIcon>
+          <Bold />
+        </ToggleIcon>
+      </Toggle>
+      <Toggle value="italic" size="icon-sm" aria-label="Italic">
+        <ToggleIcon>
+          <Italic />
+        </ToggleIcon>
+      </Toggle>
+    </ToggleGroup>
+  )
+}
+```
+
+A `ToggleGroup` is a tight row with 4px between toggles, one tab stop and arrow keys between them. Give it an accessible name and each toggle a `value`. With `multiple`, several stay pressed; without it, pressing one unpresses the others. The group's `value` replaces a toggle's `pressed` and `defaultPressed`.
+
+## Sound
+
+A toggle plays `toggle` when sound is on, going up when it presses and down when it releases. Pass `sound={false}` to silence it.
+
+## API
+
+<AutoTypeTable path="./src/components/ui/toggle.tsx" name="ToggleOwnProps" />
+
+Toggle also takes every UI SDK `Toggle` prop, and `ToggleGroup` takes the group props:
+
+| Prop | On | Type | Meaning |
+| --- | --- | --- | --- |
+| `pressed`, `defaultPressed` | `Toggle` | `boolean` | Whether it's pressed. Alone only. |
+| `onPressedChange` | `Toggle` | `(pressed, details) => void` | Runs when a press wants to change it. |
+| `value` | `Toggle` | `string` | Identifies the toggle inside a group. |
+| `value`, `defaultValue` | `ToggleGroup` | `string[]` | The pressed toggles' values. |
+| `onValueChange` | `ToggleGroup` | `(value, details) => void` | Runs when the pressed toggles change. |
+| `multiple` | `ToggleGroup` | `boolean` | Whether several toggles can be pressed at once. |
+| `deselectable` | `ToggleGroup` | `boolean` | With one pressed at a time, whether it can be unpressed. |
+| `disabled` | both | `boolean` | Stops presses. |
+
+See [UI SDK Toggle](https://ui-sdk.dev/docs/components/toggle) for the rest.
+
+## Keyboard
+
+| Key | Action |
+| --- | --- |
+| Enter, Space | Presses or releases the toggle. |
+| ArrowRight, ArrowLeft | In a group, moves focus between toggles without pressing. |

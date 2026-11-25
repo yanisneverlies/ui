@@ -44,5 +44,5 @@ Every component follows these, current and future. Adapted from UI SDK's API gui
 ## Sound
 
 - Off by default. A component plays a cue only when `SoundProvider` has sound on.
-- Defaults: Switch and Checkbox play `toggle`. Everything else is silent unless given a `sound`.
+- Defaults: Switch, Checkbox and Toggle play `toggle`. Everything else is silent unless given a `sound`.
 - Never on hover, never on page load, never repeated for errors.

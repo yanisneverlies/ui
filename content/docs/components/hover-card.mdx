@@ -1,0 +1,65 @@
+---
+title: Hover card
+description: A preview that opens when the pointer rests on a link or keyboard focus reaches it.
+---
+
+<ComponentPreview name="hover-card-demo" />
+
+## Installation
+
+<Install name="hover-card" />
+
+## Usage
+
+```tsx title="Usage"
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
+
+export function Example() {
+  return (
+    <HoverCard>
+      <HoverCardTrigger href="/letters/49">Letter 49</HoverCardTrigger>
+      <HoverCardContent>
+        <p className="text-body font-medium">On the shortness of life</p>
+        <p className="text-small text-muted-foreground tnum">6 min read</p>
+      </HoverCardContent>
+    </HoverCard>
+  )
+}
+```
+
+The trigger is a link, so give it an `href`; pressing it follows the link. The card only adds a preview, so everything in it must also be on the page the link goes to: touch and screen reader users may never open it. For a hint on a button use [Tooltip](/docs/components/tooltip); for content that opens on press use [Popover](/docs/components/popover).
+
+## Footnote
+
+The preview at the top shows a note for a phrase in the text: the Latin behind it.
+
+## Linked letter
+
+A link to another letter, with its title, its first sentence and its reading time.
+
+<ComponentPreview name="hover-card-link" />
+
+## API
+
+This component has no own props. Common UI SDK options:
+
+| Prop | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `delay` | `number` | `600` | On `HoverCard`. Milliseconds the pointer rests on the link before the card opens. |
+| `closeDelay` | `number` | `300` | On `HoverCard`. Milliseconds before it closes once the pointer leaves. |
+| `disabled` | `boolean` | `false` | On `HoverCard`. Leaves a plain link. |
+| `open` | `boolean` | | Whether the card is open. Pass it to control it. |
+| `onOpenChange` | `(open, details) => void` | | Runs when it wants to open or close. |
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"bottom"` | On `HoverCardContent`. Flips when there isn't room. |
+| `align` | `"start" \| "center" \| "end"` | `"center"` | On `HoverCardContent`. |
+| `sideOffset` | `number` | `8` | On `HoverCardContent`. Gap to the link, in pixels (UI SDK's own default is 4). |
+
+See [UI SDK Hover Card](https://ui-sdk.dev/docs/components/hover-card) for the rest, including one shared card for many links.
+
+## Keyboard
+
+| Key | Action |
+| --- | --- |
+| Focus on the link | Opens the card after the delay. |
+| Tab | From a link with an open card, moves into the card; past its end, on to the page. |
+| Escape | Closes the card. |
